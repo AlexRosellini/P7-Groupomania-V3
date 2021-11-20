@@ -1,0 +1,23 @@
+.header {
+    @include flex-C;
+    background-color: $gray;
+    height: 150px;
+    @include padding-left-right-large;
+    border-bottom: 2px solid blue;
+
+    &__img {
+        width: 20%;
+        & img {
+            width: 100%;
+        }
+    }
+
+    &__right {
+        width: 80%;
+        padding-bottom: 10px;
+        & h1 {
+            text-align: center;
+            font-weight: bolder;
+        }
+    }
+}

@@ -1,0 +1,131 @@
+/**********************************/
+//Flex Mixin
+
+@mixin flex-C {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/**********************************/
+//margin small
+
+@mixin margin-left-small {
+    margin-left: 10px;    
+}
+
+@mixin margin-right-small {
+    margin-right: 10px;    
+}
+
+@mixin margin-left-right-small {
+    margin-left: 10px;  
+    margin-right: 10px;  
+}
+
+/**********************************/
+//margin large
+
+@mixin margin-left-large {
+    margin-left: 20px;    
+}
+
+@mixin margin-right-large {
+    margin-right: 20px;    
+}
+
+@mixin margin-left-right-large {
+    margin-left: 20px;  
+    margin-right: 20px;  
+}
+
+/**********************************/
+//padding small
+
+@mixin padding-left-small {
+    padding-left: 10px;    
+}
+
+@mixin padding-right-small {
+    padding-right: 10px;    
+}
+
+@mixin padding-left-right-small {
+    padding-left: 10px;  
+    padding-right: 10px;  
+}
+
+/**********************************/
+//padding large
+
+@mixin padding-left-large {
+    padding-left: 20px;    
+}
+
+@mixin padding-right-large {
+    padding-right: 20px;    
+}
+
+@mixin padding-left-right-large {
+    padding-left: 20px;  
+    padding-right: 20px;  
+}
+
+/**********************************/
+//padding top-bottom
+
+@mixin padding-top-small {
+    padding-top: 10px;  
+}
+
+@mixin padding-bottom-small {
+    padding-bottom: 10px;  
+}
+
+@mixin padding-top-large {
+    padding-top: 20px;  
+}
+
+@mixin padding-bottom-large {
+    padding-bottom: 20px;  
+}
+
+@mixin padding-top-bottom-small {
+    padding-top: 10px; 
+    padding-bottom: 10px;  
+}
+
+@mixin padding-top-bottom-large {
+    padding-bottom: 20px;  
+    padding-top: 20px; 
+}
+
+/**********************************/
+//margin top-bottom
+
+@mixin margin-top-small {
+    margin-top: 10px;  
+}
+
+@mixin margin-bottom-small {
+    margin-bottom: 10px;  
+}
+
+@mixin margin-top-large {
+    margin-top: 20px;  
+}
+
+@mixin margin-bottom-large {
+    margin-bottom: 20px;  
+}
+
+@mixin margin-top-bottom-small {
+    margin-top: 10px; 
+    margin-bottom: 10px;  
+}
+
+@mixin margin-top-bottom-large {
+    margin-bottom: 20px;  
+    margin-top: 20px; 
+}
