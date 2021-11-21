@@ -1,0 +1,76 @@
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    background-color: $background;
+
+    &__form {
+        background-color: $card;
+        padding: 20px;
+        border-radius: 40px;
+
+        & h2 {
+            font-size: 18px;
+        }
+        
+        & ul {
+            @include padding-left-right-large;
+            display: flex;
+            justify-content: space-between;
+
+            cursor: pointer;
+            text-align: center;
+
+            & li {
+                @include margin-top-bottom-small;
+                @include padding-left-right-large;
+                @include padding-top-bottom-small;
+                text-decoration: underline;
+                border: 1px solid black;            
+                width: 100%;
+            }
+        }
+
+        &-top {
+            @include padding-bottom-large;
+            text-align: center;
+        }
+
+        &-bottom {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &-btn {
+            max-height: 50px;
+            padding: 5px;
+            border-radius: 10px;
+            color: rgb(223, 217, 217);
+            background-color: rgb(17, 17, 17);
+            font-weight: bolder;
+        }
+
+        &-form {
+            display: table;
+            width: 50%;
+
+            & label {
+                display: table-cell;
+            }
+
+            & input {
+                display: table-cell;
+            }
+        }
+
+    }
+}
+
+.react-tabs__tab--selected {
+    color: rgb(245, 240, 240);
+    background-color: rgb(17, 17, 17);
+}
+
