@@ -1,8 +1,11 @@
 import {useState, useEffect, react} from 'react';
+import Loader from '../Loader/loader';
+
 
 const ProfileInfo = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState(null)
+    const [description, setDescription] = useState(null)
     const userId = JSON.parse(window.localStorage.getItem('userid'));
     console.log(userId)
 
@@ -23,8 +26,7 @@ const ProfileInfo = () => {
         })
     },[])
        
-
-    if (loading) return 'Loading...'
+    if (loading) return <Loader/>
     
     return ( 
         <>
@@ -38,7 +40,15 @@ const ProfileInfo = () => {
                 </div>
             </div>
             <div className="profile-right">
-                <h3>Description:</h3>
+                <div className="profile-right__info">
+                <h3>Nom de compte:</h3>
+                <p> {data.userName} </p>
+                <h3>Votre Email</h3>
+                <p> {data.email} </p>    
+                </div>
+                <div className="profile-right__description">
+
+                </div>
             </div>
         </div>
         </>
