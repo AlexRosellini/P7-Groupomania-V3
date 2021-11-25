@@ -11,7 +11,8 @@ const User = db.define('user', {
     password: {
         type: Sequelize.STRING,
     },
-    isAdmin: false
+    isAdmin: false,
+    description: 'No description availiable yet'
 });
 
 module.exports = User;

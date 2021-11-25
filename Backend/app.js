@@ -22,8 +22,12 @@ const app = express();
 
 /*********************************************************************************/
 //Vu que l'on a deux origines, on ajoute un middleware pour éviter les érreurs CORS
-
-app.use(cors())
+const corsOptions = {
+  origin:'http://localhost:3001',
+  credentials:true,
+  optionSuccessStatus:'200'
+}
+app.use(cors(corsOptions))
 
 
 /****************************************************************/

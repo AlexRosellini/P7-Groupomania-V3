@@ -32,7 +32,8 @@ exports.signup = (req, res, next) => {
             userName: req.body.userName,
             email: req.body.email,
             password: hash,
-            isAdmin: false
+            isAdmin: false,
+            description: 'Pas de Bio pour le moment!'
         });
     user.save()
     .then(() => {res.status(200).json({message: 'success'})})     
@@ -88,4 +89,27 @@ exports.oneUser = (req, res, next) => {
           console.log(error)
       }
 };
-  
+
+exports.updateUser = (req, res, next) => {
+    try {
+        const token = req.headers.authorization.split(" ")[1];
+        const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+        const userId = decodedToken.userId;
+        
+        let selector = {
+            where: { id: req.params.id },
+        }
+
+        let values = {description: req.body.description}
+
+        User.update(values, selector)
+        .then(function(rowsUpdated) {
+            res
+            .status(200)
+            .json(rowsUpdated)
+        })
+    }
+    catch (error) {
+        res.status(500).json({error})
+    }
+}

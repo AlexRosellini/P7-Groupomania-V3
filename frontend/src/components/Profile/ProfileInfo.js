@@ -5,20 +5,21 @@ import Loader from '../Loader/loader';
 const ProfileInfo = () => {
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState(null)
-    const [description, setDescription] = useState(null)
+    const [description, setDescription] = useState('')
     const userId = JSON.parse(window.localStorage.getItem('userid'));
     console.log(userId)
 
     useEffect(() => { 
-        fetch('http://localhost:3000/api/auth/' + userId)
+        fetch(`http://localhost:3000/api/auth/${userId}`)
         .then((response) => {
             if (response.ok) {
                 return response.json()
             } 
             throw response
         })
-        .then(data => {
+        .then(data => {                
             setData(data)
+            setDescription(data.description)
             console.log(data)
         })
         .finally (() => {
@@ -27,7 +28,36 @@ const ProfileInfo = () => {
     },[])
        
     if (loading) return <Loader/>
-    
+
+    const handleClick = async() => {
+        try {
+        console.log(description)
+        let updatedDesc = description
+        console.log(updatedDesc)
+        let token = window.localStorage.getItem('token')
+        fetch(`http://localhost:3000/api/auth/${userId}`, {
+            method: 'PUT',
+            credentials: 'include',                
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                updatedDesc
+            })
+        })
+        .then((response) => {
+            if (response.ok) {        
+                console.log(response)
+            } else {
+                console.log(response, description)
+            }
+        })
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     return ( 
         <>
         <h1>Bienvenu sur votre profile {data.userName}</h1>
@@ -41,13 +71,17 @@ const ProfileInfo = () => {
             </div>
             <div className="profile-right">
                 <div className="profile-right__info">
-                <h3>Nom de compte:</h3>
-                <p> {data.userName} </p>
-                <h3>Votre Email</h3>
-                <p> {data.email} </p>    
+                    <h3>Nom de compte:</h3>
+                    <p> {data.userName} </p>
+                    <h3>Votre Email</h3>
+                    <p> {data.email} </p>    
                 </div>
                 <div className="profile-right__description">
-
+                <h3>Dites en plus sur vous!</h3>
+                    <p> {description} </p>
+                    <input type="text" className="profile-right__description-input" onChange={(e) => 
+                    setDescription(e.target.value)} />
+                    <button className="profile-right__changeDescription" onClick={handleClick} >Changer votre bio!</button>
                 </div>
             </div>
         </div>

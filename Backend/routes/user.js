@@ -16,7 +16,7 @@ router.post('/login',  userCtrl.login)
 router.get('/:id', userCtrl.oneUser)
 //router.get('/', auth, userCtrl.getAllUsers)
 //router.delete('/:id', auth, userCtrl.delete)
-//router.put('/:id', auth, userCtrl.modifyUser)
+router.put('/:id', auth, userCtrl.updateUser)
 
 /*********************************************************************************/
 //On exporte note router.
