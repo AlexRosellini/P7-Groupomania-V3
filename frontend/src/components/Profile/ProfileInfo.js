@@ -10,7 +10,7 @@ const ProfileInfo = () => {
     console.log(userId)
 
     useEffect(() => { 
-        fetch(`http://localhost:3000/api/auth/${userId}`)
+        fetch(`http://localhost:3000/api/user/${userId}`)
         .then((response) => {
             if (response.ok) {
                 return response.json()
@@ -29,29 +29,27 @@ const ProfileInfo = () => {
        
     if (loading) return <Loader/>
 
-    const handleClick = async() => {
+    const handleClick = () => {
         try {
-        console.log(description)
-        let updatedDesc = description
-        console.log(updatedDesc)
-        let token = window.localStorage.getItem('token')
-        fetch(`http://localhost:3000/api/auth/${userId}`, {
-            method: 'PUT',
-            credentials: 'include',                
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                updatedDesc
+            console.log(description)
+            let token = window.localStorage.getItem('token')
+            fetch(`http://localhost:3000/api/user/${userId}`, {
+                method: 'PUT',
+                credentials: 'include',                
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    description: description
+                })
             })
-        })
-        .then((response) => {
-            if (response.ok) {        
-                console.log(response)
-            } else {
-                console.log(response, description)
-            }
-        })
+            .then((response) => {
+                if (response.ok) {        
+                    console.log(response)
+                } else {
+                    console.log(response, description)
+                }
+            })
         }
         catch (error) {
             console.log(error)

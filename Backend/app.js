@@ -5,8 +5,8 @@ const cors = require('cors')
 const helmet = require('helmet')
 const db = require('./config/database');
 const path = require('path'); //Module node qui sert à cacher notre addresse Mongo (marche avec dotenv)
-const userRoutes = require('./routes/user'); //Notre router utilisateur
-
+const authRoutes = require('./routes/auth'); //Notre router auth
+const userRoutes = require('./routes/user'); //Notre router user
 
 /*********************************************************************************/
 //On ce connect sur notre database
@@ -44,6 +44,7 @@ app.use(helmet());
 app.use('/images', express.static(path.join(__dirname, 'images'))); //On indique le dossier pour multer
 
 //app.use('/api/posts', sauceRoutes)
-app.use('/api/auth', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes)
 
 module.exports = app
