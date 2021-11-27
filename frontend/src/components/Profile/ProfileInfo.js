@@ -1,55 +1,28 @@
 import {useState, useEffect, react} from 'react';
 import Loader from '../Loader/loader';
+import useAuthStore from '../../stores/auth';
+import useUserStore from '../../stores/user';
+
 
 
 const ProfileInfo = () => {
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState(null)
     const [description, setDescription] = useState('')
-    const userId = JSON.parse(window.localStorage.getItem('userid'));
-    console.log(userId)
+    const data = useUserStore(state => state.currentUser);
+    const updateUserDesc = useUserStore(state => state.updateUserDesc)
+    const currentUserLoading = useUserStore(state => state.loading);
+    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
+    const token = useAuthStore(state => state.token)
+    const userId = useAuthStore(state => state.userId);
 
     useEffect(() => { 
-        fetch(`http://localhost:3000/api/user/${userId}`)
-        .then((response) => {
-            if (response.ok) {
-                return response.json()
-            } 
-            throw response
-        })
-        .then(data => {                
-            setData(data)
-            setDescription(data.description)
-            console.log(data)
-        })
-        .finally (() => {
-            setLoading(false)
-        })
-    },[])
+        fetchCurrentUser();
+    }, [])
        
-    if (loading) return <Loader/>
+    if (currentUserLoading) return <Loader/>
 
     const handleClick = () => {
         try {
-            console.log(description)
-            let token = window.localStorage.getItem('token')
-            fetch(`http://localhost:3000/api/user/${userId}`, {
-                method: 'PUT',
-                credentials: 'include',                
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    description: description
-                })
-            })
-            .then((response) => {
-                if (response.ok) {        
-                    console.log(response)
-                } else {
-                    console.log(response, description)
-                }
-            })
+           updateUserDesc( userId, token, description)
         }
         catch (error) {
             console.log(error)
@@ -58,7 +31,7 @@ const ProfileInfo = () => {
 
     return ( 
         <>
-        <h1>Bienvenu sur votre profile {data.userName}</h1>
+        <h1>Bienvenu sur votre profile {data?.userName}</h1>
         <div className="profile">
             
             <div className="profile-left">
@@ -70,15 +43,15 @@ const ProfileInfo = () => {
             <div className="profile-right">
                 <div className="profile-right__info">
                     <h3>Nom de compte:</h3>
-                    <p> {data.userName} </p>
+                    <p> {data?.userName} </p>
                     <h3>Votre Email</h3>
-                    <p> {data.email} </p>    
+                    <p> {data?.email} </p>    
                 </div>
                 <div className="profile-right__description">
                 <h3>Dites en plus sur vous!</h3>
-                    <p> {description} </p>
-                    <input type="text" className="profile-right__description-input" onChange={(e) => 
-                    setDescription(e.target.value)} />
+                    <p> {data?.description} </p>
+                    <input type="text" className="profile-right__description-input" onChange={(e) => {
+                    setDescription(e.target.value)}}  />
                     <button className="profile-right__changeDescription" onClick={handleClick} >Changer votre bio!</button>
                 </div>
             </div>

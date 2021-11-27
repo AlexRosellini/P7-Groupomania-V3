@@ -1,19 +1,16 @@
-import isAuthenticated from "../../services/AuthService";
 import Header from "../../components/header/header";
 import ProfileInfo from "../../components/Profile/ProfileInfo";
-
+import useAuthStore from "../../stores/auth";
 
 const Profile = () => {
-    if (isAuthenticated() === false) {
-        window.location.replace('/')
-    } else {
+  const token = useAuthStore((state) => state.token);
 
-        return (
-            <>
-            <ProfileInfo/>
-            </>
-        )
-    }
-} 
+  return (
+    <>
+      <Header/>
+      <ProfileInfo />
+    </>
+  );
+};
 
 export default Profile;

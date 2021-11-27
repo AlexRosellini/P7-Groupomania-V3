@@ -4,7 +4,6 @@ module.exports = new Sequelize('Groupomania', 'postgres', process.env.DbPass, {
     host: 'localhost',
     dialect: 'postgres',
     operatorAliases: false,
-
     pool:{
         max: 5,
         min: 0,

@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require('cors')
 const helmet = require('helmet')
 const db = require('./config/database');
+const runSeeders = require('./seeders');
 const path = require('path'); //Module node qui sert à cacher notre addresse Mongo (marche avec dotenv)
 const authRoutes = require('./routes/auth'); //Notre router auth
 const userRoutes = require('./routes/user'); //Notre router user
@@ -14,6 +15,16 @@ const userRoutes = require('./routes/user'); //Notre router user
 db.authenticate()
     .then(() => { console.log('OK...')})
     .catch(err => console.log('error' + err))
+    
+db.sync({force: process.env.NODE_ENV === "dev"}).then(() => {
+  if(process.env.NODE_ENV) {
+    runSeeders();
+  }
+})
+  .catch(err => console.log('error' + err));
+
+
+
 
 /*********************************************************************************/
 //On créer notre application

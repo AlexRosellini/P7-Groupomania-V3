@@ -1,52 +1,22 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import jwt_decode from "jwt-decode";
+import useAuthStore from '../../stores/auth';
 
 
 const LoginSignup = () => {
+    const login = useAuthStore(state => state.login);
+    const register = useAuthStore(state => state.register);
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('')
 
     const handleLogin = async() => {
-        fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                userName,
-                password,
-            })
-        })
-        .then(res => res.json())
-        .then(res => {
-            const decoded = jwt_decode(res.token);
-            let {userId} = decoded
-            localStorage.setItem("token", res.token);
-            localStorage.setItem("userid", userId);
-            window.location.replace('/profile')
-        })
+        login(userName, password);
     }
 
     const handleRegister = async() => {
-        fetch('http://localhost:3000/api/auth/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            userName,
-            password,
-            email
-        })
-    })
-    .then(response => response.text())
-    .then(response => {
-            setMessage("L'enregistrement est un succès!")
-            window.location.reload()
-        })
+        register(userName, email, password)
     }
 
         return ( 
