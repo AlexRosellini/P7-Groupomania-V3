@@ -33,12 +33,17 @@ exports.oneUser = (req, res, next) => {
 exports.updateUser = async (req, res) => {
   try {
     let id = req.params.id
-
-    const user = await User.update(req.body, {where: {id: id}})
+    let image;
+    if (req.file) {
+      image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+    }
+    if (image) {
+      User.image = image
+    }
+    const user = await User.update({...req.body, image: image}, {where: {id: id}})
     res.status(200).send(user)  
   }
-  catch(err) {
+  catch(error) {
     res.status(500).send(error)
   }
-
 }

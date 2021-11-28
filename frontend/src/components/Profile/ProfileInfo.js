@@ -60,7 +60,7 @@ const ProfileInfo = () => {
             <div className="profile-left">
                 <h2>Votre Avatar:</h2>
                 <div className="profile-left__picture">
-                    <img src={image} alt="placeholder" />
+                    <img src={data?.image} alt="placeholder" />
                 </div>
                 <input id='files' accept="image/png, image/jpeg,
                     image/bmp, image/gif" type="file" className="profile-left__files" onChange={(e) => {
