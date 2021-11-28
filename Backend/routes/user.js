@@ -5,14 +5,14 @@ const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/user')
 const auth = require("../middleware/auth");
-const ValPassword = require('../middleware/validatorPassword'); //Notre middleware de validation
-const ValEmail = require('../middleware/validatorEmail');
+const multer = require('../middleware/multer-config')
+
 
 /*********************************************************************************/
 //On créer nos routes.
 
 router.get('/:id', userCtrl.oneUser)
-router.put('/:id', auth, userCtrl.updateUser)
+router.put('/:id', auth, multer, userCtrl.updateUser)
 
 /*********************************************************************************/
 //On exporte note router.

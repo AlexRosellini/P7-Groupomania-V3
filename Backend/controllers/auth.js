@@ -33,7 +33,8 @@ exports.signup = (req, res, next) => {
             email: req.body.email,
             password: hash,
             isAdmin: false,
-            description: 'Pas de Bio pour le moment!'
+            description: 'Pas de Bio pour le moment!',
+            image: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
         });
     user.save()
     .then(() => {res.status(200).json({message: 'success'})})     

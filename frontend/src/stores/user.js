@@ -17,6 +17,9 @@ const useUserStore = create((set) => ({
   },
   updateUserDesc: async (userId, token, description) => {
       const response = await userService.updateUserDesc(userId, token, description);
+  },
+  updateUserPicture: async (userId, token, myFormData) => {
+    const response = await userService.updateUserPicture(userId, token, myFormData);
   }
 }));
 

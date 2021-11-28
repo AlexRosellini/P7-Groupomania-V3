@@ -30,23 +30,19 @@ exports.oneUser = (req, res, next) => {
 /*********************************************************************************/
 //Pour update un utilisateur 
 
-exports.updateUser = (req, res, next) => {
-    try {
-
-        let selector = {
-            where: { id: req.params.id },
-        }
-
-        let values = {description: req.body.description}
-
-        User.update(values, selector)
-        .then(function(rowsUpdated) {
-            res
-            .status(200)
-            .json(rowsUpdated)
-        })
+exports.updateUser = async (req, res) => {
+  try {
+    let id = req.params.id
+    if (req.file) {
+      image = `${req.protocol}://${req.get("host")}/api/upload/${
+        req.file.filename
+      }` 
     }
-    catch (error) {
-        res.status(500).json({error})
-    }
+    const user = await User.update(req.body, {where: {id: id}})
+    res.status(200).send(user)  
+  }
+  catch(err) {
+    res.status(500).send(error)
+  }
+
 }

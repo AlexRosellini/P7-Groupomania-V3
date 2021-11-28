@@ -18,7 +18,10 @@ const User = db.define('user', {
     description: {
         type: Sequelize.STRING,
         default: 'No description availiable yet',
-         
+    },
+    image: {
+        type: Sequelize.STRING,
+        default: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
     }
 });
 

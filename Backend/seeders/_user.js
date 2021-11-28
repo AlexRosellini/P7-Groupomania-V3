@@ -11,6 +11,7 @@ const userSeeder = async () => {
       password: bcrypt.hashSync("password", 10),
       isAdmin: false,
       description: "Pas de Bio pour le moment!",
+      image: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
     },
     {
       userName: "Admin",
@@ -18,6 +19,7 @@ const userSeeder = async () => {
       password: bcrypt.hashSync("password", 10),
       isAdmin: true,
       description: "Pas de Bio pour le moment!",
+      image: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
     },
   ];
 
