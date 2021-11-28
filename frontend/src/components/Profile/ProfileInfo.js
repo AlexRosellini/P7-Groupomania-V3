@@ -27,7 +27,9 @@ const ProfileInfo = () => {
     const handleClick = () => {    
 
         try {
+           console.log(description)
            updateUserDesc( userId, token, description)
+           console.log(description)
         }
         catch (error) {
             console.log(error)
@@ -75,7 +77,9 @@ const ProfileInfo = () => {
                 <div className="profile-right__description">
                 <h3>Dites en plus sur vous!</h3>
                     <p> {data?.description} </p>
-                    <input type="text" className="profile-right__description-input"/>
+                    <input type="text" className="profile-right__description-input" onChange={(e) => {
+                        setDescription(e.target.value)
+                    }} />
                     <button className="profile-right__changeDescription" onClick={handleClick} >Changer votre bio!</button>
                 </div>
             </div>

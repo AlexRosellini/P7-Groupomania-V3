@@ -33,11 +33,7 @@ exports.oneUser = (req, res, next) => {
 exports.updateUser = async (req, res) => {
   try {
     let id = req.params.id
-    if (req.file) {
-      image = `${req.protocol}://${req.get("host")}/api/upload/${
-        req.file.filename
-      }` 
-    }
+
     const user = await User.update(req.body, {where: {id: id}})
     res.status(200).send(user)  
   }
