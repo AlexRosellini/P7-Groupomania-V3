@@ -37,7 +37,7 @@ const ProfileInfo = () => {
     }
 
     const handlePic = (e) => {
-        try {   
+        try {    
             e.preventDefault()            
             let data = new FormData();
             data.append('image', image)

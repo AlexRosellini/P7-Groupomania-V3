@@ -34,11 +34,11 @@ const updateUserPicture = async(userId, token, data) => {
     credentials: 'include',                
     headers: {
         'Authorization': `Bearer ${token}`,
-        'content-type': 'multipart/form-data'
       },
-    body: JSON.stringify({
-        image: data
-    })
+    body: {
+       image: data
+    }
+
 })
   if (response.ok) {        
     const res = response.json();
