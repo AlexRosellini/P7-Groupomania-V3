@@ -15,7 +15,7 @@ const ProfileInfo = () => {
     const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
     const token = useAuthStore(state => state.token)
     const userId = useAuthStore(state => state.userId);
-    
+    console.log(image)
 
     useEffect(() => { 
         fetchCurrentUser();
@@ -37,13 +37,11 @@ const ProfileInfo = () => {
     }
 
     const handlePic = (e) => {
-        try {        
-            e.preventDefault()
-            console.log(image)
-            let formData = new FormData();
-            formData.append('image', image)
-            updateUserPicture( userId, token, formData)
-            
+        try {   
+            e.preventDefault()            
+            let data = new FormData();
+            data.append('image', image)
+            updateUserPicture( userId, token, data)
         }
         catch(error) {
             console.log(error)
@@ -63,8 +61,11 @@ const ProfileInfo = () => {
                 </div>
                 <form encType="multipart/form-data" onSubmit={handlePic}>
                     <input id='files' accept="image/png, image/jpeg,
-                        image/bmp, image/gif" type="file" className="profile-left__files" onChange={(e) => {
-                        setImage(e.target.value)}}  />
+                        image/bmp, image/gif" type="file" className="profile-left__files"
+                        onChange={event => {
+                            const file = event.target.files[0];
+                            setImage(file)
+                        }}/>
                     <button className="profile-left__submit">Changer photo de profil</button>
                 </form>
             </div>

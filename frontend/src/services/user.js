@@ -28,7 +28,7 @@ const updateUserDesc = async(userId, token, description) => {
       }
 }
 
-const updateUserPicture = async(userId, token, myFormData) => {
+const updateUserPicture = async(userId, token, data) => {
   const response = fetch(`http://localhost:3000/api/user/${userId}`, {
     method: 'PUT',
     credentials: 'include',                
@@ -37,7 +37,7 @@ const updateUserPicture = async(userId, token, myFormData) => {
         'content-type': 'multipart/form-data'
       },
     body: JSON.stringify({
-        image: myFormData
+        image: data
     })
 })
   if (response.ok) {        
