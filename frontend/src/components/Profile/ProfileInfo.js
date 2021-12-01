@@ -36,15 +36,10 @@ const ProfileInfo = () => {
         }
     }
 
-    const handlePic = () => {
+    const handlePic = (e) => {
         try {        
-            const files = document.getElementById("files");
-            console.log(files)
-            const file = files.files[0]
-            setImage(files)
-            let myFormData = new FormData();
-            myFormData.append('image', file)
-            updateUserPicture( userId, token, myFormData)
+            e.preventDefault()
+            updateUserPicture( userId, token, image)
 
         }
         catch(error) {
@@ -61,11 +56,14 @@ const ProfileInfo = () => {
                 <h2>Votre Avatar:</h2>
                 <div className="profile-left__picture">
                     <img src={data?.image} alt="placeholder" />
+                    
                 </div>
-                <input id='files' accept="image/png, image/jpeg,
-                    image/bmp, image/gif" type="file" className="profile-left__files" onChange={(e) => {
-                    setImage(e.target.value)}}  />
-                <button className="profile-left__submit" onClick={handlePic}>Changer photo de profil</button>
+                <form encType="multipart/form-data">
+                    <input id='files' accept="image/png, image/jpeg,
+                        image/bmp, image/gif" type="file" className="profile-left__files" onChange={(e) => {
+                        setImage(e.target.value)}}  />
+                    <button className="profile-left__submit" onSubmit={handlePic}>Changer photo de profil</button>
+                </form>
             </div>
             <div className="profile-right">
                 <div className="profile-right__info">

@@ -34,7 +34,8 @@ const updateUserPicture = async(userId, token, myFormData) => {
     credentials: 'include',                
     headers: {
         'Authorization': `Bearer ${token}`,
-    },
+        'content-type': 'multipart/form-data'
+      },
     body: JSON.stringify({
         image: myFormData
     })
