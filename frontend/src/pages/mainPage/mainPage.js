@@ -1,4 +1,6 @@
 import Header from "../../components/header/header";
+
+
 import useAuthStore from "../../stores/auth";
 
 const MainPage = () => {

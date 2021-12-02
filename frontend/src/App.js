@@ -41,7 +41,9 @@ function App() {
           <Route
             path="/posts"
             element={
+              <RequireAuth>
                 <MainPage />
+              </RequireAuth>
             }
             exact
           /> 

@@ -58,9 +58,8 @@ const ProfileInfo = () => {
           headers: {
               'Authorization': `Bearer ${token}`,
             },
-          body: {
+          body: 
             formData
-          }
       })
         if (response.ok) {        
           const res = response.json();

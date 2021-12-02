@@ -34,6 +34,8 @@ exports.updateUser = async (req, res) => {
   try {
     let id = req.params.id
     let image;
+    console.log(req.file)
+    console.log(req.body)
     if (req.file) {
       image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
     }
