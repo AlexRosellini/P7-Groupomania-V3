@@ -1,0 +1,15 @@
+.nav {
+    background-color: $nav;
+    &__ul {
+        @include padding-top-bottom-small;
+        @include padding-left-right-large;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__li {
+        cursor: pointer;
+        color: white;
+    }
+
+}

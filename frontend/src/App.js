@@ -4,8 +4,10 @@ import { Navigate, useLocation } from "react-router";
 import useAuthStore from "./stores/auth";
 import Landing from "./pages/Landing/Landing";
 import Profile from "./pages/profile/profile";
+import MainPage from "./pages/mainPage/mainPage";
 
-const RequireAuth = ({ children }) => {
+
+const RequireAuth =  ({ children }) => {
   const token = useAuthStore((state) => state.token);
   let location = useLocation();
 
@@ -35,7 +37,14 @@ function App() {
                 <Profile />
               </RequireAuth>
             }
-          />
+          />                
+          <Route
+            path="/posts"
+            element={
+                <MainPage />
+            }
+            exact
+          /> 
         </Routes>
       </Router>
     </>

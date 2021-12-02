@@ -36,38 +36,57 @@ const ProfileInfo = () => {
         }
     }
 
-    const handlePic = (e) => {
-        try {    
-            e.preventDefault()            
-            let data = new FormData();
-            data.append('image', image)
-            updateUserPicture( userId, token, data)
-        }
-        catch(error) {
-            console.log(error)
-        } 
-    }
+    //const handlePic = (e) => {
+    //    try {    
+    //        console.log(image)
+    //        e.preventDefault()            
+    //        updateUserPicture( userId, token, image)
+    //    }
+    //    catch(error) {
+    //        console.log(error)
+    //    } 
+    //}
+
+    const handlePic = async(e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        console.log(formData)
+        formData.append('image', image)
+        const response = fetch(`http://localhost:3000/api/user/${userId}`, {
+          method: 'PUT',
+          credentials: 'include',                
+          headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          body: {
+            formData
+          }
+      })
+        if (response.ok) {        
+          const res = response.json();
+          console.log(res)
+        } else {
+              console.log(response)
+          }
+      }
 
     return ( 
         <>
-        <h1>Bienvenu sur votre profile {data?.userName}</h1>
-        <div className="profile">
-            
+        <div className="profile__surround">               
+        <div className="profile">        
             <div className="profile-left">
                 <h2>Votre Avatar:</h2>
                 <div className="profile-left__picture">
                     <img src={data?.image} alt="placeholder" />
                     
                 </div>
-                <form encType="multipart/form-data" onSubmit={handlePic}>
                     <input id='files' accept="image/png, image/jpeg,
                         image/bmp, image/gif" type="file" className="profile-left__files"
                         onChange={event => {
                             const file = event.target.files[0];
                             setImage(file)
                         }}/>
-                    <button className="profile-left__submit">Changer photo de profil</button>
-                </form>
+                    <button className="profile-left__submit" onClick={handlePic}>Changer photo de profil</button>
             </div>
             <div className="profile-right">
                 <div className="profile-right__info">
@@ -79,13 +98,15 @@ const ProfileInfo = () => {
                 <div className="profile-right__description">
                 <h3>Dites en plus sur vous!</h3>
                     <p> {data?.description} </p>
-                    <input type="text" className="profile-right__description-input" onChange={(e) => {
+                    <textarea type="text"
+                    className="profile-right__description-input" size='30' onChange={(e) => {
                         setDescription(e.target.value)
                     }} />
                     <button className="profile-right__changeDescription" onClick={handleClick} >Changer votre bio!</button>
                 </div>
             </div>
         </div>
+        </div>     
         </>
      );
 }

@@ -3,6 +3,7 @@ require('dotenv').config(); //Dotenv nous permet de cacher certains elements dan
 const express = require("express");
 const cors = require('cors')
 const helmet = require('helmet')
+let morgan = require('morgan');
 const db = require('./config/database');
 const runSeeders = require('./seeders');
 const path = require('path'); //Module node qui sert à cacher notre addresse Mongo (marche avec dotenv)
@@ -51,6 +52,8 @@ app.use(express.urlencoded({
 }));
 
 app.use(helmet()); 
+
+app.use(morgan('combined'))
 
 app.use('/images', express.static(path.join(__dirname, 'images'))); //On indique le dossier pour multer
 

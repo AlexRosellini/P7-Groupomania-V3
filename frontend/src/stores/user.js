@@ -18,8 +18,9 @@ const useUserStore = create((set) => ({
   updateUserDesc: async (userId, token, description) => {
       const response = await userService.updateUserDesc(userId, token, description);
   },
-  updateUserPicture: async (userId, token, data) => {
-    const response = await userService.updateUserPicture(userId, token, data);
+  updateUserPicture: async (userId, token, image) => {
+    const response = await userService.updateUserPicture(userId, token, image);
+    console.log(response)
   }
 }));
 
