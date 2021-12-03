@@ -11,7 +11,7 @@ const Landing = () => {
     let location = useLocation();
 
     if(token) {
-      return <Navigate to="/profile" state={{ from: location }} />;
+      return <Navigate to="/posts" state={{ from: location }} />;
     }
 
     return (

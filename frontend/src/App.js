@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navigate, useLocation } from "react-router";
+import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
+import { Navigate, useLocation,  } from "react-router";
 import useAuthStore from "./stores/auth";
 import Landing from "./pages/Landing/Landing";
 import Profile from "./pages/profile/profile";
 import MainPage from "./pages/mainPage/mainPage";
+import CreatePost from "./pages/createPost/createPost";
 
 
 const RequireAuth =  ({ children }) => {
@@ -24,6 +25,8 @@ function App() {
   useEffect(() => {
     retrieveToken()
   }, [])
+
+  const { userId } = useParams()
   
   return (
     <>
@@ -31,18 +34,27 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} exact />
           <Route
-            path="/profile"
+            path="/posts"
+            element={
+              <RequireAuth>
+                <MainPage />
+              </RequireAuth>
+            }
+          /> 
+          <Route
+            path="/profile/:userId"
             element={
               <RequireAuth>
                 <Profile />
               </RequireAuth>
             }
           />                
+
           <Route
-            path="/posts"
+            path="/create"
             element={
               <RequireAuth>
-                <MainPage />
+                <CreatePost />
               </RequireAuth>
             }
             exact

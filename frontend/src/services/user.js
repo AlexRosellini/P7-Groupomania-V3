@@ -28,18 +28,14 @@ const updateUserDesc = async(userId, token, description) => {
       }
 }
 
-const updateUserPicture = async(userId, token, image) => {
+const updateUserPicture = async(userId, token, formData) => {
   const response = fetch(`http://localhost:3000/api/user/${userId}`, {
     method: 'PUT',
     credentials: 'include',                
     headers: {
         'Authorization': `Bearer ${token}`,
-        'content-type': 'form'
       },
-    body: {
-       image: image
-    }
-
+    body: formData
 })
   if (response.ok) {        
     const res = response.json();

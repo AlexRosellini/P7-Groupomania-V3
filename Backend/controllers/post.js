@@ -13,3 +13,12 @@ exports.getAllPosts = async (req, res, next) => {
           })
     }
 }
+
+exports.createPost = async (req, res, next) => {
+    try {
+
+    }
+    catch(err) {
+        
+    }
+}
