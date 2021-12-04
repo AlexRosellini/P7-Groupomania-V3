@@ -7,8 +7,7 @@ const CreatePost = () => {
     
     return ( 
         <>
-        <Header/>
-        <Nav/>
+        {/* <Nav/> */}
         </>
      );
 }

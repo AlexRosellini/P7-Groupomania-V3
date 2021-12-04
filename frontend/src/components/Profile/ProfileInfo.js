@@ -4,29 +4,31 @@ import useAuthStore from '../../stores/auth';
 import useUserStore from '../../stores/user';
 import { useHistory, useParams } from "react-router-dom";
 
-const ProfileInfo = () => {
+const ProfileInfo = ({userId}) => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-    const {userId} = useParams()
-    const data = useUserStore(state => state.User);
-    const getUser = useUserStore(state => state.fetchUser);
+    const data = useUserStore(state => state.currentUser);
+    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
     const updateUserDesc = useUserStore(state => state.updateUserDesc);
     const updateUserPicture = useUserStore(state => state.updateUserPicture);
     const currentUserLoading = useUserStore(state => state.loading);
     const token = useAuthStore(state => state.token);
 
     useEffect(() => {
-        getUser(userId);
+        fetchCurrentUser();
+        console.log(data)
     },[])
 
     if (currentUserLoading) return <Loader/>
     console.log(userId)
+    
     const handleClick = () => {    
 
         try {
            console.log(description)
-           updateUserDesc( userId, token, description)
+           updateUserDesc( userId, token, description)          
            console.log(description)
+           window.location.reload();
         }
         catch (error) {
             console.log(error)
@@ -39,6 +41,8 @@ const ProfileInfo = () => {
             formData.append('image', image)
             e.preventDefault()            
             updateUserPicture( userId, token, formData)
+            window.location.reload();
+
         }
         catch(error) {
             console.log(error)

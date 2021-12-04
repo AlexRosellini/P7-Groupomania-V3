@@ -1,13 +1,15 @@
 import ProfileInfo from "../../components/Profile/ProfileInfo";
-import { useParams } from "react-router";
+import useAuthStore from "../../stores/auth";
 
 const Profile = () => {
-  const {userId} = useParams()
+  const userId = useAuthStore((state) => state.userId);
   if(!userId) {
     return <>loading ...</>
   }
   return (
-      <ProfileInfo userId={userId} />
+    <>
+      <ProfileInfo userId={userId}/>
+    </>
   );
 };
 

@@ -4,7 +4,6 @@ import userService from "../services/user";
 
 
 const useUserStore = create((set) => ({
-  currentUser: null,
   User: null,
   loading: false,
   fetchCurrentUser: async () => {
@@ -16,14 +15,6 @@ const useUserStore = create((set) => ({
         console.log(currentUser)
     }
   },
-
-  fetchUser: async (userId) => {
-    set({ loading: true })
-    const User = await userService.getUser(userId);
-    set({ User, loading: false });
-    console.log(User)
-  },
-
   updateUserDesc: async (userId, token, description) => {
       const response = await userService.updateUserDesc(userId, token, description);
   },

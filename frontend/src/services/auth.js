@@ -12,9 +12,14 @@ const login = async (userName, password) => {
     }),
   });
   const result = await response.json();
-  const decoded = await jwt_decode(result.token);
-  let { userId } = decoded;
-  return { userId, token: result.token };
+
+  if(result.token) {
+    const decoded = await jwt_decode(result.token);
+    let { userId } = decoded;
+    return { userId, token: result.token };
+  }else {
+    return result
+  }
 };
 
 const register = async (userName, email, password) => {

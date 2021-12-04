@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useAlert } from "react-alert";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import useAuthStore from '../../stores/auth';
 
 
 const LoginSignup = () => {
+    const alert = useAlert();
     const login = useAuthStore(state => state.login);
     const register = useAuthStore(state => state.register);
+    const error = useAuthStore(state => state.error);
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('')
+    
+    useEffect(() => {
+        if(error) {
+            alert.show(error)
+        }
+    }, [error])
 
     const handleLogin = async() => {
         login(userName, password);

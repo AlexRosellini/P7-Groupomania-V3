@@ -2,21 +2,10 @@ import React from "react";
 import {useState, useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import useAuthStore from '../../stores/auth';
-import useUserStore from '../../stores/user';
 
 const Nav = () => {
 
     const logout = useAuthStore(state => state.logout)
-    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
-    const data = useUserStore(state => state.currentUser);
-    const currentUserId = useAuthStore.getState().userId
-
-    useEffect(() => { 
-        const getUser = async() => {
-            await fetchCurrentUser();
-        }
-        getUser()
-    }, [])    
 
     const handleClick = () => {
         logout()
@@ -26,7 +15,7 @@ const Nav = () => {
         <>
         <div className="nav">
             <ul className="nav__ul">
-                <NavLink to={`/profile/${currentUserId}`}>
+                <NavLink to={`/profile`}>
                     <li className="nav__li">
                         Profile
                     </li>

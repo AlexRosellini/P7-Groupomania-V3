@@ -8,8 +8,7 @@ const MainPage = () => {
 
   return (
     <>
-      <Header/>
-      <Nav/>
+      Posts list
     </>
   );
 };

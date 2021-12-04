@@ -26,7 +26,6 @@ db.sync({force: process.env.NODE_ENV === "dev"}).then(() => {
 
 
 
-
 /*********************************************************************************/
 //On créer notre application
 

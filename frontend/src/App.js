@@ -1,66 +1,91 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
-import { Navigate, useLocation,  } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navigate, useLocation } from "react-router";
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-mui';
 import useAuthStore from "./stores/auth";
+import Layout from "./components/Layout";
 import Landing from "./pages/Landing/Landing";
-import Profile from "./pages/profile/profile";
+import CurrentUserProfile from "./pages/profile/CurrentUserProfile";
+import Profile from "./pages/profile/Profile";
 import MainPage from "./pages/mainPage/mainPage";
 import CreatePost from "./pages/createPost/createPost";
+import LoginSignupPage from "./pages/LoginSignup/LoginSignup";
 
+// optional configuration
+const alertOptions = {
+  // you can also just use 'bottom center'
+  position: positions.BOTTOM_CENTER,
+  timeout: 5000,
+  offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.SCALE
+}
 
-const RequireAuth =  ({ children }) => {
+const RequireAuth = ({ children }) => {
   const token = useAuthStore((state) => state.token);
   let location = useLocation();
 
   if (!token) {
-    return <Navigate to="/" state={{ from: location }} />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
 
   return children;
 };
 
 function App() {
-  const retrieveToken = useAuthStore(state => state.retrieveTokenUserId)
-  
-  useEffect(() => {
-    retrieveToken()
-  }, [])
+  const retrieveToken = useAuthStore((state) => state.retrieveTokenUserId);
 
-  const { userId } = useParams()
-  
+  useEffect(() => {
+    retrieveToken();
+  }, []);
+
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Landing />} exact />
-          <Route
-            path="/posts"
-            element={
-              <RequireAuth>
-                <MainPage />
-              </RequireAuth>
-            }
-          /> 
-          <Route
-            path="/profile/:userId"
-            element={
-              <RequireAuth>
-                <Profile />
-              </RequireAuth>
-            }
-          />                
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+        <Router>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Landing />} exact />
+              <Route path="/login" element={<LoginSignupPage />} />
+              <Route
+                path="/posts"
+                element={
+                  <RequireAuth>
+                    <MainPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/profile"
+                exact
+                element={
+                  <RequireAuth>
+                    <CurrentUserProfile />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/profile/:userId"
+                element={
+                  <RequireAuth>
+                    <Profile />
+                  </RequireAuth>
+                }
+              />
 
-          <Route
-            path="/create"
-            element={
-              <RequireAuth>
-                <CreatePost />
-              </RequireAuth>
-            }
-            exact
-          /> 
-        </Routes>
-      </Router>
+              <Route
+                path="/create"
+                element={
+                  <RequireAuth>
+                    <CreatePost />
+                  </RequireAuth>
+                }
+              />
+            </Route>
+          </Routes>
+        </Router>
+      </AlertProvider>
     </>
   );
 }

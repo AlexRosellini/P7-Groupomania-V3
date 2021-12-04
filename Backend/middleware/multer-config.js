@@ -1,6 +1,7 @@
 /*********************************************************************************/
 //On importe ce dont nous avons besoin.
-
+const fs = require('fs');
+const path = require('path');
 const multer = require('multer'); //multer permet de gêrer les fichiers dans no requêtes
 
 /*********************************************************************************/
@@ -14,7 +15,11 @@ const MIME_TYPES = { //On traduit nos extensions via leurs mimetypes
 
 const storage = multer.diskStorage({  //On créer un objet de configuration pour multer, qu'on enregistre sur disque.
   destination: (req, file, callback) => { 
-    callback(null, 'images'); //On indique ou les fichiers sont sauvegardés
+    const imageDir = path.resolve(__dirname, '../images');
+    if(!fs.existsSync(imageDir)) {
+      fs.mkdirSync(imageDir)
+    }
+    callback(null, imageDir); //On indique ou les fichiers sont sauvegardés
   },
   filename: (req, file, callback) => { //On genère le nom du fichier
     const name = file.originalname.split(' ').join('_'); //On remplace les espaces du nom d'origine et on ajoute des "_"
