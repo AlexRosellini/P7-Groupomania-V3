@@ -2,7 +2,6 @@ import {useState, useEffect, react} from 'react';
 import Loader from '../Loader/loader';
 import useAuthStore from '../../stores/auth';
 import useUserStore from '../../stores/user';
-import { useHistory, useParams } from "react-router-dom";
 
 const ProfileInfo = ({userId}) => {
     const [description, setDescription] = useState('');
