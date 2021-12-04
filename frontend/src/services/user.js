@@ -45,7 +45,6 @@ const updateUserPicture = async(userId, token, formData) => {
     }
 }
 
-
 export default {
   getUser, updateUserDesc, updateUserPicture
 };

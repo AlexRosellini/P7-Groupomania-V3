@@ -8,9 +8,11 @@ const PostForm = () => {
 
     const data = useUserStore(state => state.currentUser);
     const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
+    const token = useAuthStore(state => state.token)
     const [title, setTitle] = useState('');
     const [textContent, setTextContent] = useState('');
     const [mediaContent, setMediaContent] = useState('');
+    console.log(token)
     
     useEffect(() => {
         fetchCurrentUser();
@@ -22,7 +24,19 @@ const PostForm = () => {
             e.preventDefault()            
             const formData = new FormData();
             formData.append('image', mediaContent)
-            console.log(title, textContent, mediaContent, data.userName)            
+            formData.append('title', title)
+            formData.append('textContent', textContent)
+            fetch(`http://localhost:3000/api/post/create`, {
+                method: 'POST',
+                credentials: 'include',                
+                headers: {
+                'Authorization': `Bearer ${token}`,
+                 },
+                 body: JSON.stringify({
+                    title,
+                    textContent,
+                  }),
+            })        
         }
         catch(e) {
             console.log(e)

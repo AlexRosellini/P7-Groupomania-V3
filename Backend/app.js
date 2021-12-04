@@ -9,6 +9,7 @@ const runSeeders = require('./seeders');
 const path = require('path'); //Module node qui sert à cacher notre addresse Mongo (marche avec dotenv)
 const authRoutes = require('./routes/auth'); //Notre router auth
 const userRoutes = require('./routes/user'); //Notre router user
+const postRoutes = require('./routes/post');
 
 /*********************************************************************************/
 //On ce connect sur notre database
@@ -17,13 +18,13 @@ db.authenticate()
     .then(() => { console.log('OK...')})
     .catch(err => console.log('error' + err))
     
-db.sync({force: process.env.NODE_ENV === "dev"}).then(() => {
-  if(process.env.NODE_ENV) {
-    runSeeders();
-  }
-})
-  .catch(err => console.log('error' + err));
-
+//db.sync({force: process.env.NODE_ENV === "dev"}).then(() => {
+//  if(process.env.NODE_ENV) {
+//    runSeeders();
+//  }
+//})
+//  .catch(err => console.log('error' + err));
+//
 
 
 /*********************************************************************************/
@@ -56,8 +57,13 @@ app.use(morgan('combined'))
 
 app.use('/images', express.static(path.join(__dirname, 'images'))); //On indique le dossier pour multer
 
-//app.use('/api/posts', sauceRoutes)
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes)
+app.use('/api/post', postRoutes)
+
+app.use(function (err, req, res, next) {
+  console.log('This is the invalid field ->', err.field)
+  next(err)
+})
 
 module.exports = app
