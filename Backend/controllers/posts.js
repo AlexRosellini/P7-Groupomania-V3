@@ -2,8 +2,6 @@
 //On importe ce dont nous avons besoin.
 
 const Post = require('../models/post'); //on importe le schéma pour nos utilisateurs.
-const Sequelize = require('sequelize')
-
 
 exports.getAllPosts = (req, res, next) => {
   try {
@@ -32,6 +30,26 @@ exports.getOnePost = (req, res, next) => {
           console.log(error)
       }
 };
+
+exports.modifyPost = async (req, res, next) => {
+  try {
+    let id = req.params.id
+    let image;
+    console.log(req.file)
+    console.log(req.body)
+    if (req.file) {
+      image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+    }
+    if (image) {
+      Post.image = image
+    }
+    const post = await Post.update({...req.body, image: image}, {where: {id: id}})
+    res.status(200).json(post)  
+  }
+  catch(error) {
+    res.status(500).send(error)
+  }
+}
 
 exports.createPost = (req, res) => {
     let image
