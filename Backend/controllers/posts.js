@@ -4,8 +4,6 @@
 const Post = require('../models/post'); //on importe le schéma pour nos utilisateurs.
 const Sequelize = require('sequelize')
 
-/*********************************************************************************/
-//notre middleware pour récuperer tout les posts.
 
 exports.getAllPosts = (req, res, next) => {
   try {
@@ -35,9 +33,6 @@ exports.getOnePost = (req, res, next) => {
       }
 };
 
-/*********************************************************************************/
-//notre middleware creation, pour créer un post
-
 exports.createPost = (req, res) => {
     let image
     if (req.body.title === null || !req.body.title) {
@@ -60,4 +55,13 @@ exports.createPost = (req, res) => {
         .then(() => {res.status(200).json({message: 'success'})})     
         .catch(error => res.status(400).json({ message : 'something went wrong ... ' + error})) //Sinon un message d'érreur (si même email)
     }
+}
+
+exports.deletePost = (req, res) => {
+  Post.findOne({where: {id: req.params.id}})
+    .then((post) => {
+      post.destroy({where: {id: req.params.id}})
+    })
+    .then(() => res.status(200).json({message: 'Post deleted'}))
+    .catch((error) => res.status(400).json({error: error}))
 }

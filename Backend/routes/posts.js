@@ -16,7 +16,7 @@ router.post("/create", auth, multer, postCtrl.createPost);
 router.get('/:id', postCtrl.getOnePost)
 router.get('/', postCtrl.getAllPosts )
 //router.put('/:id', auth, multer, postCtrl.modifyPost); //On ajoute multer ici également, pour gêrer les modifications d'images.
-//router.delete('/:id', auth, postCtrl.deletePost);
+router.delete('/:id', auth, postCtrl.deletePost);
 
 /*********************************************************************************/
 //On exporte notre module.
