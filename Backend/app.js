@@ -9,7 +9,7 @@ const runSeeders = require('./seeders');
 const path = require('path'); //Module node qui sert à cacher notre addresse Mongo (marche avec dotenv)
 const authRoutes = require('./routes/auth'); //Notre router auth
 const userRoutes = require('./routes/user'); //Notre router user
-const postRoutes = require('./routes/post');
+const postRoutes = require('./routes/posts');
 
 /*********************************************************************************/
 //On ce connect sur notre database
@@ -59,7 +59,7 @@ app.use('/images', express.static(path.join(__dirname, 'images'))); //On indique
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes)
-app.use('/api/post', postRoutes)
+app.use('/api/posts', postRoutes)
 
 app.use(function (err, req, res, next) {
   console.log('This is the invalid field ->', err.field)
