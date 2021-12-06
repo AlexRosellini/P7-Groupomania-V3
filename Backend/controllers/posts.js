@@ -1,28 +1,38 @@
 /*********************************************************************************/
 //On importe ce dont nous avons besoin.
 
-const Post = require('../models/post'); //on importe le schéma pour nos utilisateurs.
+const { Post, User, Comment } = require('../models/Index');
 
 exports.getAllPosts = (req, res, next) => {
   try {
-    Post.findAll() 
+    Post.findAll({
+      include: [{
+          model: User,
+      }],
+      order: [['createdAt', 'DESC']]
+  }) 
       .then((post) => res.status(200).json(post))
   }
-  catch(err) {
-    res.status(404).json({error: error})
+  catch(error) {
+    res.status(400).json({message: 'error :' + error})
   }
 }
 
 exports.getOnePost = (req, res, next) => {
     try {
-    Post.findOne({where: { id: req.params.id },})
+    Post.findOne({where: { id: req.params.id }}, 
+      {include: 
+        [{
+          model: User,
+        }], 
+        order: [['createdAt', 'DESC']]
+      })
       .then((post) => {
         res.status(200).json(post);
       })
       .catch((error) => {
         res.status(404).json({
-          error: error,
-          message: "if there is any logic to this",
+          message: error,
         });
       })
     }
@@ -67,7 +77,8 @@ exports.createPost = (req, res) => {
             title: req.body.title,
             textContent: req.body.textContent,
             author: req.body.author,
-            image: image
+            image: image,
+            userId: req.token.userId
         })
         post.save()
         .then(() => {res.status(200).json({message: 'success'})})     

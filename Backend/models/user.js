@@ -23,6 +23,8 @@ const User = db.define('user', {
         type: Sequelize.STRING,
         default: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
     }
-}, {});
+}, {
+    
+});
 
 module.exports = User;

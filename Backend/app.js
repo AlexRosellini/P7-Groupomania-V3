@@ -10,11 +10,13 @@ const path = require('path'); //Module node qui sert à cacher notre addresse Mo
 const authRoutes = require('./routes/auth'); //Notre router auth
 const userRoutes = require('./routes/user'); //Notre router user
 const postRoutes = require('./routes/posts');
+const {load} = require('./models/index')
 
 /*********************************************************************************/
 //On ce connect sur notre database
 
 db.authenticate()
+    load()
     .then(() => { console.log('OK...')})
     .catch(err => console.log('error' + err))
     
