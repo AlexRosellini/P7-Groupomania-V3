@@ -11,8 +11,8 @@ const commentCtrl = require('../controllers/comment')
 //On créer nos routes
 
 router.post("/:id", auth, multer, commentCtrl.createComment);
-//router.put('/:id', auth, multer, commentCtrl.modifyPost); //On ajoute multer ici également, pour gêrer les modifications d'images.
-//router.delete('/:id', auth, commentCtrl.deletePost);
+router.put('/:id', auth, multer, commentCtrl.modifyComment);
+router.delete('/:id', auth, commentCtrl.deleteComment);
 
 /*********************************************************************************/
 //On exporte notre module.
