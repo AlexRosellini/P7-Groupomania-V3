@@ -6,10 +6,21 @@ const { Post, User, Comment } = require('../models/Index');
 exports.getAllPosts = (req, res, next) => {
   try {
     Post.findAll({
-      include: [{
+      order: [["createdAt", "DESC"]],
+      include: [
+        {
           model: User,
-      }],
-      order: [['createdAt', 'DESC']]
+        },
+        {
+          model: Comment,
+          order: [["createdAt", "DESC"]],
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
   }) 
       .then((post) => res.status(200).json(post))
   }
@@ -20,13 +31,24 @@ exports.getAllPosts = (req, res, next) => {
 
 exports.getOnePost = (req, res, next) => {
     try {
-    Post.findOne({where: { id: req.params.id }}, 
-      {include: 
-        [{
+    Post.findOne({
+      where: { id: req.params.id }, 
+      order: [["createdAt", "DESC"]],
+      include: [
+        {
           model: User,
-        }], 
-        order: [['createdAt', 'DESC']]
-      })
+        },
+        {
+          model: Comment,
+          order: [["createdAt", "DESC"]],
+          include: [
+            {
+              model: User,
+            },
+          ],
+        },
+      ],
+    })
       .then((post) => {
         res.status(200).json(post);
       })

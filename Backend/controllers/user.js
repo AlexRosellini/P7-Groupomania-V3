@@ -1,10 +1,7 @@
 /*********************************************************************************/
 //On importe ce dont nous avons besoin.
 
-const bcrypt = require('bcrypt'); //Bcrypt sert à Hash (et donc sécuriser) les passwords
-const jwt = require('jsonwebtoken'); //jsonwebtoken genère un token (pour que nos users ne se connectent qu'une fois)
 const { Post, User} = require('../models/Index');
-const Sequelize = require('sequelize');
 
 /*********************************************************************************/
 //Pour récuperer un utilisateur

@@ -10,6 +10,7 @@ const path = require('path'); //Module node qui sert à cacher notre addresse Mo
 const authRoutes = require('./routes/auth'); //Notre router auth
 const userRoutes = require('./routes/user'); //Notre router user
 const postRoutes = require('./routes/posts');
+const commentRoutes = require('./routes/comments')
 const {load} = require('./models/index')
 
 /*********************************************************************************/
@@ -60,8 +61,10 @@ app.use(morgan('combined'))
 app.use('/images', express.static(path.join(__dirname, 'images'))); //On indique le dossier pour multer
 
 app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes)
-app.use('/api/posts', postRoutes)
+app.use('/api/user', userRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
+
 
 app.use(function (err, req, res, next) {
   console.log('This is the invalid field ->', err.field)
