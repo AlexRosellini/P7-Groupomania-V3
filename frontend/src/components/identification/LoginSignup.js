@@ -61,7 +61,7 @@ const LoginSignup = () => {
                                                 onChange={(e) => { 
                                                     setPassword(e.target.value)}}/>
                                             </div>
-                                        </div>                                            
+                                        </div>    
                                         <button className="auth__form-btn" onClick={handleLogin}>Se connecter</button>
                                     </div>
                                 </TabPanel>
@@ -91,7 +91,7 @@ const LoginSignup = () => {
                                                     setPassword(e.target.value)}}/>
                                             </div>
                                         </div>
-                                        <button className="auth__form-btn" onClick={handleRegister}>S'enregistrer</button>
+                                        <button className="bg-blue-400 py-2 px-6 rounded text-white shadow hover:bg-blue-500" onClick={handleRegister}>test</button>
                                     </div>
                                     <div className="message">
                                         <p> {message} </p>
