@@ -13,7 +13,7 @@ const postCtrl = require('../controllers/posts')
 //Chaque route aura "Auth" qui permet d'authentifier l'utilisateur sur chaque demandes.
 router.post("/create", auth, multer, postCtrl.createPost);
 router.get('/:id', auth, postCtrl.getOnePost)
-router.get('/', auth, postCtrl.getAllPosts )
+router.get('/', postCtrl.getAllPosts )
 router.put('/:id', auth, multer, postCtrl.modifyPost); //On ajoute multer ici également, pour gêrer les modifications d'images.
 router.delete('/:id', auth, postCtrl.deletePost);
 

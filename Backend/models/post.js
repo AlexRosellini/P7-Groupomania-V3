@@ -8,9 +8,6 @@ const Post = db.define('post', {
     textContent: {
         type: Sequelize.STRING,
     },
-    author: {
-        type: Sequelize.STRING
-    },
     image: {
         type: Sequelize.STRING
     }

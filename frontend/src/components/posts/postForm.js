@@ -17,19 +17,7 @@ const PostForm = () => {
     useEffect(() => {
         fetchCurrentUser();
         console.log(data)
-        getAllPost()
     },[])
-
-    const getAllPost = async (userId) => {
-        const response = await fetch(`http://localhost:3000/api/posts`)
-       if(!response.ok) {
-           return null;
-       }
-       const result = await response.json()
-    
-       console.log(result)
-    };
-    
 
     const handleSubmit = (e) => {
         try {            
@@ -44,10 +32,7 @@ const PostForm = () => {
                 headers: {
                 'Authorization': `Bearer ${token}`,
                  },
-                 body: JSON.stringify({
-                    title,
-                    textContent,
-                  }),
+                 body: formData,
             })        
         }
         catch(e) {

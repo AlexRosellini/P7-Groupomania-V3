@@ -98,7 +98,6 @@ exports.createPost = (req, res) => {
         const post = new Post({
             title: req.body.title,
             textContent: req.body.textContent,
-            author: req.body.author,
             image: image,
             userId: req.token.userId
         })
