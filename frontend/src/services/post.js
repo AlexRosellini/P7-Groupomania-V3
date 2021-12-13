@@ -20,8 +20,18 @@ const PostPost = async (token, formData) => {
     const result = await response.json();
     console.log(result)
     return result
-  };
+};
+
+const getOnePost = async (id, token) => {
+  const response = await fetch(`http://localhost:3000/api/posts/${id}`)
+ if(!response.ok) {
+     return null;
+ }
+ const result = await response.json()
+
+ return result;
+};
 
 export default {
-    getAllPosts,  PostPost
+    getAllPosts,  PostPost, getOnePost
 };

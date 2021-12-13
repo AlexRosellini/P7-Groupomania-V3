@@ -12,6 +12,12 @@ const usePostStore = create((set) => ({
         set({posts, loading: false });
         console.log(posts)
     },
+    getOnePost: async (id) => {
+        set({ loading: true})
+        const result = await postService.getOnePost(id);
+        set({loading: false})
+        console.log(result)
+    },
     sendPost: async (token, formData) => {
         set({ loading: true})
         const result = await postService.PostPost(token, formData);
