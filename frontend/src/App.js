@@ -11,6 +11,7 @@ import Profile from "./pages/profile/Profile";
 import MainPage from "./pages/mainPage/mainPage";
 import CreatePost from "./pages/createPost/createPost";
 import LoginSignupPage from "./pages/LoginSignup/LoginSignup";
+import SinglePost from "./pages/singlePost/singlePost";
 
 // optional configuration
 const alertOptions = {
@@ -73,7 +74,6 @@ function App() {
                   </RequireAuth>
                 }
               />
-
               <Route
                 path="/create"
                 element={
@@ -82,7 +82,15 @@ function App() {
                   </RequireAuth>
                 }
               />
-            </Route>
+              <Route
+                path="/posts/:id"
+                element={
+                  <RequireAuth>
+                    <SinglePost />
+                  </RequireAuth>
+                }
+              />
+              </Route>
           </Routes>
         </Router>
       </AlertProvider>

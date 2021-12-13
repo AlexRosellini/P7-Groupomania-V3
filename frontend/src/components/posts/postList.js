@@ -4,16 +4,13 @@ import useAuthStore from '../../stores/auth';
 import usePostStore from '../../stores/post';
 import useUserStore from '../../stores/user';
 import user from '../../services/user';
+import { NavLink } from "react-router-dom";
 
 
 const PostList = () => {
     const fetchPosts = usePostStore(state => state.fetchAllPosts);
     const posts = usePostStore(state => state.posts);
     const loading = usePostStore(state => state.loading);
-
-    
-
-
 
     useEffect( () => {
         if (loading === true) {
@@ -27,9 +24,10 @@ const PostList = () => {
 
     return ( 
         <>
-            <main className="h-full flex flex-col justify-center items-center">
+            <main className="h-full flex flex-col justify-center items-center bg-gray-900">
             {posts.map(post => (
-                <div className="border max-w-screen-md w-1/2 bg-white mt-6 mb-6 rounded-2xl p-4" key={post.id}>
+                <NavLink to={`/posts/${post.id}`}>
+                <div className="border max-w-screen-md bg-white mt-6 mb-6 rounded-2xl p-4" key={post.id}>
                 <div className="flex items-center justify-between">
                     <div className="gap-3.5	flex items-center ">
                         <img src={post.user.image} alt="testImg"
@@ -82,6 +80,7 @@ const PostList = () => {
                     <div className="text-sm pl-4"> {post.comments.length} comments </div>
                 </div>   
             </div>
+            </NavLink>
             ))}
         </main>
         </>    
