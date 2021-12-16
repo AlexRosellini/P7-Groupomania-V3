@@ -12,6 +12,7 @@ import MainPage from "./pages/mainPage/mainPage";
 import CreatePost from "./pages/createPost/createPost";
 import LoginSignupPage from "./pages/LoginSignup/LoginSignup";
 import SinglePost from "./pages/singlePost/singlePost";
+import EditPostPage from "./pages/editPost/editPost";
 
 // optional configuration
 const alertOptions = {
@@ -58,7 +59,7 @@ function App() {
                 }
               />
               <Route
-                path="/profile"
+                path="/MyProfile"
                 exact
                 element={
                   <RequireAuth>
@@ -67,7 +68,8 @@ function App() {
                 }
               />
               <Route
-                path="/profile/:userId"
+                path="/profile/:id"
+                exact
                 element={
                   <RequireAuth>
                     <Profile />
@@ -87,6 +89,22 @@ function App() {
                 element={
                   <RequireAuth>
                     <SinglePost />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/edit/:id"
+                element={
+                  <RequireAuth>
+                    <EditPostPage />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/profile/:id"
+                element={
+                  <RequireAuth>
+                    <Profile />
                   </RequireAuth>
                 }
               />

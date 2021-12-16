@@ -15,7 +15,7 @@ const Nav = () => {
         <>
         <div className="nav">
             <ul className="nav__ul">
-                <NavLink to={`/profile`}>
+                <NavLink to={`/MyProfile`}>
                     <li className="nav__li">
                         Profile
                     </li>

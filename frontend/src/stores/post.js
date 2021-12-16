@@ -3,7 +3,7 @@ import postService from "../services/post";
 import userService from "../services/user";
 
 const usePostStore = create((set) => ({
-    currentPost: null,
+    currentPost: [],
     posts: [],
     loading: false,
     fetchAllPosts: async () => {
@@ -12,15 +12,33 @@ const usePostStore = create((set) => ({
         set({posts, loading: false });
         console.log(posts)
     },
-    getOnePost: async (id) => {
+    getOnePost: async (id, userId) => {
         set({ loading: true})
-        const result = await postService.getOnePost(id);
-        set({loading: false})
-        console.log(result)
+        const currentPost = await postService.getOnePost(id);
+        set({currentPost, loading: false});
+        console.log(currentPost)
     },
     sendPost: async (token, formData) => {
         set({ loading: true})
         const result = await postService.PostPost(token, formData);
+        set({loading: false})
+        console.log(result)
+    },
+    editPost: async (id, token, formData) => {
+        set({ loading: true})
+        const result = await postService.editPost(id, token, formData);
+        set({loading: false})
+        console.log(result)
+    } ,
+    deletePost: async (id, token) => {
+        set({ loading: true})
+        const result = await postService.deletePost(id, token);
+        set({loading: false})
+        console.log(result)
+    },
+    sendComment: async (id, token, content) => {
+        set({ loading: true})
+        const result = await postService.PostComment(id, token, content);
         set({loading: false})
         console.log(result)
     }

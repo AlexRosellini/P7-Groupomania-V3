@@ -1,47 +1,56 @@
 import {useState, useEffect, react} from 'react';
 import Loader from '../Loader/loader';
-import useAuthStore from '../../stores/auth';
-import useUserStore from '../../stores/user';
 import usePostStore from '../../stores/post';
+import useAuthStore from '../../stores/auth'
 import { useNavigate, useParams } from "react-router-dom";
 
 
-const PostForm = () => {
-
-    const data = useUserStore(state => state.currentUser);
-    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
-    const sendPost = usePostStore(state => state.sendPost);
+const EditPost = () => {
+    const fetchOnePost = usePostStore(state => state.getOnePost);
+    const loading = usePostStore(state => state.loading);
+    const { id } = useParams();
+    const post = usePostStore(state => state.currentPost);
+    const editPost = usePostStore(state => state.editPost);
     const token = useAuthStore(state => state.token)
-    const [title, setTitle] = useState('');
-    const [textContent, setTextContent] = useState('');
-    const [mediaContent, setMediaContent] = useState('');
-    const navigate = useNavigate();
+    const [title, setTitle] = useState(null);
+    const [textContent, setTextContent] = useState(null);
+    const [mediaContent, setMediaContent] = useState(null);
+    
 
-    useEffect(() => {
-        fetchCurrentUser();
-        console.log(data)
+    useEffect( () => {
+       fetchOnePost(id);       
+       console.log(post);
     },[])
-    console.log(sendPost)
+
+    if (loading === true) {
+        return (
+        <Loader/>
+        )
+    }
+    console.log(title);
+    console.log(textContent);
+    console.log(mediaContent)
+
     const handleSubmit = (e) => {
-        try {            
-            e.preventDefault()            
-            const formData = new FormData();
-            formData.append('image', mediaContent)
+        e.preventDefault()            
+        const formData = new FormData();
+        if (title !== null || title !== undefined) {
             formData.append('title', title)
+        }
+        if (textContent !== null || textContent !== undefined) {
             formData.append('textContent', textContent);
-            console.log(title, textContent, mediaContent)
-            sendPost(token,formData)
-            console.log(sendPost)
         }
-        catch(e) {
-            console.log(e)
+        if (mediaContent !== null || mediaContent !== undefined) {
+        formData.append('image', mediaContent)
         }
+        editPost(id, token, formData)
     }
 
-    return (  
+    return ( 
         <>
-        <main className="min-h-screen h-full flex flex-col  items-center bg-gray-900">
-                <form  className="post-form__form border w-1/2" onSubmit={handleSubmit}>
+        <main className=" min-h-screen h-full flex flex-col  items-center bg-gray-900">
+                <form  className="post-form__form border w-2/3" onSubmit={handleSubmit}>
+                    <h1>Edition de votre poste</h1>
                     <label htmlFor="title" className="post-form__label">
                         Titre:
                     </label>
@@ -57,15 +66,15 @@ const PostForm = () => {
                     <label htmlFor="mediaContent" className="post-form__label">
                         Image:
                     </label>
-                    <input type="file" name="mediaContent" accept="image/png, image/jpeg, image/bmp, image/gif" className="post-form__input" onChange={event => {
+                    <input type="file" name="mediaContent" accept="image/png, image/jpeg, image/bmp, image/gif" className="pb-6" onChange={event => {
                                 const file = event.target.files[0];
                                 setMediaContent(file)
                     }}/>
                     <button type="submit" className="font-bold  py-2 px-4 w-1/2 bg-purple-400  text-white shadow-md">Envoyer</button>
                 </form>
         </main>
-        </>
-    );
+        </>    
+ );
 }
  
-export default PostForm;
+export default EditPost;

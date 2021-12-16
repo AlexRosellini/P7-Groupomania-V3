@@ -18,20 +18,19 @@ const PostList = () => {
             <Loader/>
             )
         } 
-       fetchPosts();
-       
+       fetchPosts();   
     },[])
 
     return ( 
         <>
-            <main className="h-full flex flex-col justify-center items-center bg-gray-900">
+            <main className="h-full  flex flex-col justify-center items-center bg-gray-900">
             {posts.map(post => (
-                <NavLink to={`/posts/${post.id}`}>
-                <div className="border max-w-screen-md bg-white mt-6 mb-6 rounded-2xl p-4" key={post.id}>
+                <NavLink className='w-1/2' key={post.id} to={`/posts/${post.id}`}>
+                <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4" >
                 <div className="flex items-center justify-between">
-                    <div className="gap-3.5	flex items-center ">
+                    <div className="gap-3.5	flex items-center">
                         <img src={post.user.image} alt="testImg"
-                         className="object-cover bg-yellow-500 rounded-full w-10 h-10"/>
+                         className="object-cover bg-yellow-500 rounded-full h-10"/>
                         <div className="flex flex-col">
 					        <p className="mb-2 capitalize"> {post.user.userName} </p>
 					        <time dateTime="06-08-21" className="text-gray-400 text-xs">{post.createdAt}
@@ -48,7 +47,7 @@ const PostList = () => {
                 </div>
                 <div className="whitespace-pre-wrap mt-7"> {post.title} </div>
 		        <div className="mt-5 flex gap-2	 justify-center border-b pb-4 flex-wrap	">
-                    <img src={post.image} class="bg-red-500 rounded-2xl w-1/3 object-cover h-96 flex-auto" alt="" />
+                    <img src={post.image} class="rounded-2xl w-80 object-cover h-96 flex-auto" alt="" />
                 </div>
                 <div className=" h-16 border-b  flex items-center justify-start">
                 					<svg width="20px" height="19px" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg"

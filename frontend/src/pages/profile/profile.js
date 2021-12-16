@@ -1,13 +1,8 @@
-import ProfileInfo from "../../components/Profile/ProfileInfo";
-import { useParams } from "react-router";
+import OtherUser from "../../components/Profile/OtherUser";
 
 const Profile = () => {
-  const {userId} = useParams()
-  if(!userId) {
-    return <>loading ...</>
-  }
   return (
-      <ProfileInfo userId={userId} />
+      <OtherUser/>
   );
 };
 
