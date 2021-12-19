@@ -15,6 +15,11 @@ const useUserStore = create((set) => ({
         console.log(currentUser)
     }
   },
+  fetchUser: async (userId) => {
+    set({ loading: true })
+    const user = await userService.getUser(userId);
+    set({ user, loading: false });
+  },
   updateUserDesc: async (userId, token, description) => {
       const response = await userService.updateUserDesc(userId, token, description);
   },

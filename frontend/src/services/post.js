@@ -60,6 +60,20 @@ const deletePost = async (id, token) => {
   return result;
 }
 
+const deleteComment = async (id, token) => {
+  const response = await fetch(`http://localhost:3000/api/comments/${id}`, {
+    method: "DELETE",
+    credentials: 'include',                
+    headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  },
+  });
+  const result = await response.json();
+  console.log(result)
+  return result;  
+}
+
 const PostComment = async (id, token, content) => {
   const response = await fetch(`http://localhost:3000/api/comments/${id}`, {
     method: "POST",
@@ -77,9 +91,6 @@ const PostComment = async (id, token, content) => {
   return result
 }
 
-
-
-
 export default {
-    getAllPosts,  PostPost, PostComment, getOnePost, editPost, deletePost
+    getAllPosts,  PostPost, PostComment, getOnePost, editPost, deletePost, deleteComment
 };

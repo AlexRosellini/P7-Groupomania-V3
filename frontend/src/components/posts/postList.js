@@ -47,7 +47,7 @@ const PostList = () => {
                 </div>
                 <div className="whitespace-pre-wrap mt-7"> {post.title} </div>
 		        <div className="mt-5 flex gap-2	 justify-center border-b pb-4 flex-wrap	">
-                    <img src={post.image} class="rounded-2xl w-80 object-cover h-96 flex-auto" alt="" />
+                   { post.image ? <img src={post.image} class="rounded-2xl w-80 object-cover h-96 flex-auto" alt="" /> : ''}
                 </div>
                 <div className=" h-16 border-b  flex items-center justify-start">
                 					<svg width="20px" height="19px" viewBox="0 0 20 19" version="1.1" xmlns="http://www.w3.org/2000/svg"
