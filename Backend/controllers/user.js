@@ -56,3 +56,16 @@ exports.updateUser = async (req, res) => {
     res.status(500).send(error)
   }
 }
+
+exports.deleteUser =  (req, res) => {
+  try {
+    let id = req.params.id;
+    User.findOne({where: {id: id}})
+    .then((user) => {
+      user.destroy({where: {id: req.params.id}})
+    })
+  }
+  catch(error) {
+    res.status(500).send(error)
+  }
+}

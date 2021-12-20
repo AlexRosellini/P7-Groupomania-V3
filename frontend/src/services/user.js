@@ -8,6 +8,15 @@ const getUser = async (userId) => {
    return result;
 };
 
+const getAllUsers = async () => {
+  const response = await fetch('http://localhost:3000/api/user/')
+  if (!response.ok) {
+    return null;
+  }
+  const result = await response.json()
+  return result
+}
+
 const updateUserDesc = async(userId, token, description) => {
   const response = fetch(`http://localhost:3000/api/user/${userId}`, {
       method: 'PUT',
@@ -28,6 +37,27 @@ const updateUserDesc = async(userId, token, description) => {
       }
 }
 
+const updateUserRole = async(userId, token) => {
+ 
+  const response = fetch(`http://localhost:3000/api/user/${userId}`, {
+      method: 'PUT',
+      credentials: 'include',                
+      headers: {
+          'Authorization': `Bearer ${token}`,
+          'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+          isAdmin: true
+      })
+  })
+    if (response.ok) {        
+      const res = response.json();
+      console.log(res)
+    } else {
+          console.log(response)
+    }
+}
+
 const updateUserPicture = async(userId, token, formData) => {
   const response = fetch(`http://localhost:3000/api/user/${userId}`, {
     method: 'PUT',
@@ -42,9 +72,25 @@ const updateUserPicture = async(userId, token, formData) => {
     console.log(res)
   } else {
         console.log(response)
-    }
+  }
+}
+
+const deleteUser = async(userId, token) => {
+  const response = fetch(`http://localhost:3000/api/user/${userId}`, {
+    method: 'DELETE',
+    credentials: 'include',                
+    headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+})
+  if (response.ok) {        
+    const res = response.json();
+    console.log(res)
+  } else {
+        console.log(response)
+  }
 }
 
 export default {
-  getUser, updateUserDesc, updateUserPicture
+  getUser, getAllUsers, updateUserDesc, updateUserPicture, updateUserRole, deleteUser
 };

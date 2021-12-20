@@ -11,9 +11,10 @@ const multer = require('../middleware/multer-config')
 /*********************************************************************************/
 //On créer nos routes.
 
-router.get('/', auth, userCtrl.allUsers)
+router.get('/', userCtrl.allUsers)
 router.get('/:id', userCtrl.oneUser)
 router.put('/:id', auth, multer, userCtrl.updateUser)
+router.delete('/:id', auth, multer, userCtrl.deleteUser)
 
 /*********************************************************************************/
 //On exporte note router.

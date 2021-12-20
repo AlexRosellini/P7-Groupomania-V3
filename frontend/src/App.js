@@ -13,6 +13,7 @@ import CreatePost from "./pages/createPost/createPost";
 import LoginSignupPage from "./pages/LoginSignup/LoginSignup";
 import SinglePost from "./pages/singlePost/singlePost";
 import EditPostPage from "./pages/editPost/editPost";
+import AdminBoard from "./pages/Admin/AdminBoard"
 
 // optional configuration
 const alertOptions = {
@@ -105,6 +106,14 @@ function App() {
                 element={
                   <RequireAuth>
                     <Profile />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/adminBoard"
+                element={
+                  <RequireAuth>
+                    <AdminBoard />
                   </RequireAuth>
                 }
               />

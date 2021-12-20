@@ -8,26 +8,37 @@ const useUserStore = create((set) => ({
   loading: false,
   fetchCurrentUser: async () => {
     const currentUserId = useAuthStore.getState().userId
-    if(currentUserId) {
         set({ loading: true })
         const currentUser = await userService.getUser(currentUserId);
         set({ currentUser, loading: false });
         console.log(currentUser)
-    }
   },
   fetchUser: async (userId) => {
     set({ loading: true })
     const user = await userService.getUser(userId);
     set({ user, loading: false });
   },
+  fetchAllUsers: async () => {
+    set({ loading: true })
+    const allUsers = await userService.getAllUsers();
+    set({ allUsers, loading: false });
+  },
   updateUserDesc: async (userId, token, description) => {
       const response = await userService.updateUserDesc(userId, token, description);
   },
-
+  updateUserRole: async (userId, token, description) => {
+    const response = await userService.updateUserRole(userId, token);
+},
+  deleteUser: async (userId, token) => {
+    set({ loading: true })
+    const removeUser = await userService.deleteUser(userId, token);
+    const allUsers = await userService.getAllUsers();
+    set({ allUsers, loading: false });    
+  },
   updateUserPicture: async (userId, token, formData) => {
     const response = await userService.updateUserPicture(userId, token, formData);
     console.log(response)
-  }
+  },
 }));
 
 export default useUserStore;

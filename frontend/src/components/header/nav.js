@@ -33,6 +33,11 @@ const Nav = () => {
                 <li className="nav__li" onClick={handleClick}>
                     Logout
                 </li>
+                <NavLink to='/AdminBoard'>
+                    <li className="nav__li">
+                        Admin
+                    </li>
+                </NavLink>
             </ul>
         </div>
         </>
