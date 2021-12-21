@@ -39,7 +39,7 @@ const HeaderTest = () => {
                 <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to={`/MyProfile`}>Profile</NavLink>
                 <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='/posts'>Posts</NavLink>
                 <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='/create'>Créer un post</NavLink>
-                <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='#'>logout</NavLink>
+                <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='#' onClick={handleClick}>logout</NavLink>
                 {data?.isAdmin ? <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='/AdminBoard'>Admin</NavLink> : ''}
               </div>
             </div>
