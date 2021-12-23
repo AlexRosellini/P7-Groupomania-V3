@@ -5,14 +5,18 @@ import useUserStore from "../../stores/user";
 import useAuthStore from "../../stores/auth"
 import UserList from "../../components/AdminBoard/UserList";
 
-
 const AdminBoard = () => {
 
-  const fetchAllUsers = useUserStore(state => state.fetchAllUsers);
-  const deleteUser = useUserStore(state => state.deleteUser);
-  const currentUserLoading = useUserStore(state => state.loading);
-  const users = useUserStore(state => state.allUsers);
-  const updateUserRole = useUserStore(state => state.updateUserRole)
+  const userStateSelector = (state) => ({
+    fetchAllUsers: state.fetchAllUsers,
+    deleteUser: state.deleteUser,
+    currentUserLoading: state.loading,
+    users : state.allUsers,
+    updateUserRole: state.updateUserRole,
+});
+
+const {fetchAllUsers, deleteUser, currentUserLoading, users, updateUserRole} = useUserStore(userStateSelector);
+
   const token = useAuthStore((state) => state.token);
   console.log(users)
 
@@ -24,8 +28,8 @@ const AdminBoard = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-        console.log(userId, token)
-        await deleteUser(userId, token)
+        console.log(userId, token);
+        await deleteUser(userId, token);
     }
     catch (err) {
         console.log(err)
@@ -34,9 +38,9 @@ const AdminBoard = () => {
 
   const handleMakeAdmin = async (userId) => {
     try {
-        console.log(userId)
-        await updateUserRole(userId, token)
-
+        console.log(userId);
+        await updateUserRole(userId, token);
+        window.location.reload();
     }
     catch(err) {
         console.log(err)

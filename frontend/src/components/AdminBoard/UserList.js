@@ -7,7 +7,6 @@ import {useState, useEffect, react} from 'react';
 
 
 const UserList = ({users, onDeleteUser, onUpdateRole}) => {
-    
     return ( 
         <main className="h-full px-3 py-4 flex justify-center bg-gray-900 ">
             <table className="w-full text-md bg-white shadow-md rounded mb-4">

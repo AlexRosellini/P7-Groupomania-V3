@@ -14,7 +14,7 @@ const HeaderTest = () => {
 
     useEffect(() => {
         fetchCurrentUser();
-        console.log(data)
+        console.log(data);
     },[]);
 
 

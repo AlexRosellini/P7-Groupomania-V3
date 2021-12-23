@@ -7,24 +7,12 @@ import user from '../../services/user';
 import { NavLink } from "react-router-dom";
 
 
-const PostList = () => {
-    const fetchPosts = usePostStore(state => state.fetchAllPosts);
-    const posts = usePostStore(state => state.posts);
-    const loading = usePostStore(state => state.loading);
-
-    useEffect( () => {
-        if (loading === true) {
-            return (
-            <Loader/>
-            )
-        } 
-       fetchPosts();   
-    },[])
+const PostList = ({posts}) => {
 
     return ( 
         <>
             <main className="h-full  flex flex-col justify-center items-center bg-gray-900">
-            {posts.map(post => (
+            {posts?.map(post => (
                 <NavLink className='w-1/2' key={post.id} to={`/posts/${post.id}`}>
                 <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4" >
                 <div className="flex items-center justify-between">

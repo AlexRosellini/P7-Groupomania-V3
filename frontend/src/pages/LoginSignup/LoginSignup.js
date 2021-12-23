@@ -8,7 +8,7 @@ const Auth = () => {
         token: state.token,
         login: state.login,
         register: state.register,
-      });
+    });
 
     const {token, login, register} = useAuthStore(authStateSelector);
     let location = useLocation();
