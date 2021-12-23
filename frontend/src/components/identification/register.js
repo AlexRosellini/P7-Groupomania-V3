@@ -1,6 +1,4 @@
 import icon from '../../imgs/logo/icon.png';
-import React, { useEffect, useState } from "react";
-
 
 const Register = ({onRegister}) => {    
     return ( 

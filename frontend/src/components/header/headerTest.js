@@ -1,5 +1,5 @@
 import React from "react";
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import useAuthStore from '../../stores/auth';
 import useUserStore from '../../stores/user';

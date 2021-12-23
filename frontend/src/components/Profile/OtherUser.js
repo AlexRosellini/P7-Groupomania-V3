@@ -1,6 +1,4 @@
 const OtherUser = ({profile}) => {
-
-    console.log(profile)
     
     return ( 
         <main className="bg-gray-200">

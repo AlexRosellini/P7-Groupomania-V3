@@ -1,5 +1,4 @@
 import PostForm from "../../components/posts/postForm";
-import {useState, useEffect, react} from 'react';
 import useAuthStore from '../../stores/auth';
 import useUserStore from '../../stores/user';
 import usePostStore from '../../stores/post';
@@ -8,15 +7,14 @@ import { useNavigate} from "react-router-dom";
 const CreatePost = () => {
 
     const data = useUserStore(state => state.currentUser);
-    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
     const sendPost = usePostStore(state => state.sendPost);
     const token = useAuthStore(state => state.token);
+    const navigate = useNavigate();
 
-
-
-    const handleSubmit = (formData) => {
+    const handleSubmit = async (formData) => {
         try {            
-            sendPost(token,formData) 
+            await sendPost(token,formData) 
+            navigate('/posts')
         }
         catch(e) {
             console.log(e)

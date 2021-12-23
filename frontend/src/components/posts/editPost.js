@@ -1,55 +1,28 @@
-import {useState, useEffect, react} from 'react';
-import Loader from '../Loader/loader';
-import usePostStore from '../../stores/post';
-import useAuthStore from '../../stores/auth'
-import { useNavigate, useParams } from "react-router-dom";
+import {useState} from 'react';
 
 
-const EditPost = () => {
-    const fetchOnePost = usePostStore(state => state.getOnePost);
-    const loading = usePostStore(state => state.loading);
-    const { id } = useParams();
-    const post = usePostStore(state => state.currentPost);
-    const editPost = usePostStore(state => state.editPost);
-    const token = useAuthStore(state => state.token)
+const EditPost = ({onSubmit}) => {
     const [title, setTitle] = useState(null);
     const [textContent, setTextContent] = useState(null);
     const [mediaContent, setMediaContent] = useState(null);
-    
-
-    useEffect( () => {
-       fetchOnePost(id);       
-       console.log(post);
-    },[])
-
-    if (loading === true) {
-        return (
-        <Loader/>
-        )
-    }
-    console.log(title);
-    console.log(textContent);
-    console.log(mediaContent)
-
-    const handleSubmit = (e) => {
-        e.preventDefault()            
-        const formData = new FormData();
-        if (title !== null || title !== undefined) {
-            formData.append('title', title)
-        }
-        if (textContent !== null || textContent !== undefined) {
-            formData.append('textContent', textContent);
-        }
-        if (mediaContent !== null || mediaContent !== undefined) {
-        formData.append('image', mediaContent)
-        }
-        editPost(id, token, formData)
-    }
+    const formData = new FormData();
 
     return ( 
         <>
         <main className=" min-h-screen h-full flex flex-col  items-center bg-gray-900">
-                <form  className="post-form__form border w-2/3" onSubmit={handleSubmit}>
+                <form  className="post-form__form border w-2/3" onSubmit={(event) => {
+                    event.preventDefault();
+                    if (title !== null) {
+                        formData.append('title', title)
+                    } 
+                    if (textContent !== null) {
+                        formData.append('textContent', textContent);
+                    }
+                    if (mediaContent !== null) {
+                      formData.append('image', mediaContent)
+                    }
+                    {onSubmit(formData)}
+                }}>
                     <h1>Edition de votre poste</h1>
                     <label htmlFor="title" className="post-form__label">
                         Titre:

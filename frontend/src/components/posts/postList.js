@@ -1,9 +1,3 @@
-import {useState, useEffect, react} from 'react';
-import Loader from '../Loader/loader';
-import useAuthStore from '../../stores/auth';
-import usePostStore from '../../stores/post';
-import useUserStore from '../../stores/user';
-import user from '../../services/user';
 import { NavLink } from "react-router-dom";
 
 

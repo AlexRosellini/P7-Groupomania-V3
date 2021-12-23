@@ -1,5 +1,4 @@
 import create from "zustand";
-import { persist } from "zustand/middleware";
 import authService from "../services/auth";
 import jwt_decode from "jwt-decode";
 

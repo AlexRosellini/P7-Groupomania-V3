@@ -1,6 +1,5 @@
 import create from "zustand";
 import postService from "../services/post";
-import userService from "../services/user";
 
 const usePostStore = create((set) => ({
     currentPost: [],

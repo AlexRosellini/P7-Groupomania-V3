@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import Post from "../../components/posts/post";
 import Loader from "../../components/Loader/loader";
 import usePostStore from "../../stores/post";
 import useAuthStore from "../../stores/auth";
 import { useNavigate, useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 
 const postStateSelector = (state) => ({
   post: state.currentPost,

@@ -5,7 +5,6 @@ import useAuthStore from '../../stores/auth';
 import Login from './login';
 import Register from './register';
 
-
 const LoginSignup = ({onRegister, onLogin}) => {
     const alert = useAlert();
     const error = useAuthStore(state => state.error);

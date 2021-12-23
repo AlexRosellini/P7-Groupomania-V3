@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import Loader from "../../components/Loader/loader";
 import useUserStore from "../../stores/user";
 import useAuthStore from "../../stores/auth"

@@ -1,6 +1,4 @@
-import {useState, useEffect, react} from 'react';
-import { useNavigate, useParams } from "react-router-dom";
-
+import {useState} from 'react';
 
 const PostForm = ({onSubmit, data}) => {
 
@@ -11,7 +9,7 @@ const PostForm = ({onSubmit, data}) => {
     formData.append('image', mediaContent)
     formData.append('title', title)
     formData.append('textContent', textContent);
-    console.log(title, textContent, mediaContent);
+    
     return (  
         <>
         <main className="min-h-screen h-full flex flex-col  items-center bg-gray-900">

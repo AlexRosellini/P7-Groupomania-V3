@@ -1,9 +1,6 @@
 import React from "react";
-import { Navigate, useLocation } from "react-router";
-import Header from "../../components/header/header";
-import Nav from "../../components/header/nav";
+import {useLocation } from "react-router";
 import useAuthStore from "../../stores/auth";
-import LoginSignup from "../../components/identification/LoginSignup";
 
 
 

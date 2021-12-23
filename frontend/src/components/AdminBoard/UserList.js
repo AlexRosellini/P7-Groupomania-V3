@@ -1,11 +1,3 @@
-import { useNavigate, useParams } from "react-router-dom";
-import useAuthStore from '../../stores/auth';
-import usePostStore from '../../stores/post';
-import useUserStore from '../../stores/user';
-import Loader from '../Loader/loader';
-import {useState, useEffect, react} from 'react';
-
-
 const UserList = ({users, onDeleteUser, onUpdateRole}) => {
     return ( 
         <main className="h-full px-3 py-4 flex justify-center bg-gray-900 ">

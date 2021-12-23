@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Post = ({ post, isOwner, currentUserId, onComment, onDeletePost, onDeleteComment, onShowUser }) => {
   const [content, setContent] = useState("");
-
+  
   return (
     <main className="flex-col justify-center bg-gray-900 min-h-screen h-full pt-6 pb-6">
       <div className=" h-fit bg-white mb-6 ml-6 mr-6 mt-12">

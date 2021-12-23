@@ -2,8 +2,7 @@ import OtherUser from "../../components/Profile/OtherUser";
 import React, { useState, useEffect } from "react";
 import Loader from "../../components/Loader/loader";
 import useUserStore from "../../stores/user";
-import { useNavigate, useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import {useParams } from "react-router-dom";
 
 const Profile = () => {
 
