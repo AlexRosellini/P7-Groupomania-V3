@@ -1,4 +1,4 @@
-const OtherUser = ({profile}) => {
+const CurrUserProfile = ({profile}) => {
 
     console.log(profile)
     
@@ -8,18 +8,22 @@ const OtherUser = ({profile}) => {
         	    <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0">
         	    	<div className="p-4 md:p-12 text-center lg:text-left">
         	    		<div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"></div>
-
         	    		<h1 className="text-3xl font-bold pt-8 lg:pt-0"> {profile?.userName} </h1>
         	    		<div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
         	    		<p className="pt-8 text-sm"> {profile?.description} </p>
+                        <textarea type="text"
+                    className="profile-right__description-input" size='30'/>
+                    <button className="profile-right__changeDescription">Changer votre bio!</button>
+
         	    	</div>
         	    </div>
         	    <div className="w-full lg:w-2/5">
         	    	<img src={profile?.image} class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"/>
+
         	    </div>	
             </div>        
         </main>
      );
 }
  
-export default OtherUser;
+export default CurrUserProfile;

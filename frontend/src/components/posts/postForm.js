@@ -1,47 +1,24 @@
 import {useState, useEffect, react} from 'react';
-import Loader from '../Loader/loader';
-import useAuthStore from '../../stores/auth';
-import useUserStore from '../../stores/user';
-import usePostStore from '../../stores/post';
 import { useNavigate, useParams } from "react-router-dom";
 
 
-const PostForm = () => {
+const PostForm = ({onSubmit, data}) => {
 
-    const data = useUserStore(state => state.currentUser);
-    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
-    const sendPost = usePostStore(state => state.sendPost);
-    const token = useAuthStore(state => state.token)
     const [title, setTitle] = useState('');
     const [textContent, setTextContent] = useState('');
     const [mediaContent, setMediaContent] = useState('');
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        fetchCurrentUser();
-        console.log(data)
-    },[])
-    console.log(sendPost)
-    const handleSubmit = (e) => {
-        try {            
-            e.preventDefault()            
-            const formData = new FormData();
-            formData.append('image', mediaContent)
-            formData.append('title', title)
-            formData.append('textContent', textContent);
-            console.log(title, textContent, mediaContent)
-            sendPost(token,formData)
-            console.log(sendPost)
-        }
-        catch(e) {
-            console.log(e)
-        }
-    }
-
+    const formData = new FormData();
+    formData.append('image', mediaContent)
+    formData.append('title', title)
+    formData.append('textContent', textContent);
+    console.log(title, textContent, mediaContent);
     return (  
         <>
         <main className="min-h-screen h-full flex flex-col  items-center bg-gray-900">
-                <form  className="post-form__form border w-1/2" onSubmit={handleSubmit}>
+                <form  className="post-form__form border w-1/2" onSubmit={(event) => {
+                        event.preventDefault();
+                        onSubmit(formData)
+                    }}>
                     <label htmlFor="title" className="post-form__label">
                         Titre:
                     </label>
