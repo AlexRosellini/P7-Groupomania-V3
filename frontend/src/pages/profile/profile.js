@@ -15,12 +15,13 @@ const Profile = () => {
   useEffect(() => {
     if (userId) {
       fetchUser(userId);
-      console.log(data)
+      console.log(data);
     }
   }, [userId, fetchUser]);
 
   if (currentUserLoading) return <Loader/>
   console.log(userId)
+
 
   return (
       <OtherUser

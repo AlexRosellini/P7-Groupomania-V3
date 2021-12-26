@@ -5,16 +5,17 @@ const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/user')
 const auth = require("../middleware/auth");
+const adminAuth = require("../middleware/adminAuth")
 const multer = require('../middleware/multer-config')
 
 
 /*********************************************************************************/
 //On créer nos routes.
 
-router.get('/', userCtrl.allUsers)
+router.get('/',  userCtrl.allUsers)
 router.get('/:id', userCtrl.oneUser)
 router.put('/:id', auth, multer, userCtrl.updateUser)
-router.delete('/:id', auth, multer, userCtrl.deleteUser)
+router.delete('/:id', adminAuth, multer, userCtrl.deleteUser)
 
 /*********************************************************************************/
 //On exporte note router.

@@ -1,5 +1,4 @@
 import {useEffect} from 'react';
-import ProfileInfo from "../../components/Profile/ProfileInfo";
 import CurrUserProfile from '../../components/Profile/CurrUserProfile';
 import Loader from "../../components/Loader/loader";
 import useAuthStore from '../../stores/auth';
@@ -13,6 +12,7 @@ const Profile = () => {
       updateUserPicture: state.updateUserPicture,
       currentUserLoading: state.loading,
   });
+
   const {data, fetchCurrentUser, updateUserDesc, updateUserPicture, currentUserLoading} = useUserStore(userStateSelector);
     const token = useAuthStore(state => state.token);
     const userId = data?.id

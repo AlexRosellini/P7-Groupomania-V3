@@ -28,7 +28,7 @@ const useAuthStore = create((set) => ({
     set({ token, userId });
   },
   register: async (userName, password, email) => {
-    const response = await authService.register(userName, password, email);
+    await authService.register(userName, password, email);
   },
   logout: () => {
     localStorage.removeItem("token");

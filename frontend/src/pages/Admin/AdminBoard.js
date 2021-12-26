@@ -3,25 +3,34 @@ import Loader from "../../components/Loader/loader";
 import useUserStore from "../../stores/user";
 import useAuthStore from "../../stores/auth"
 import UserList from "../../components/AdminBoard/UserList";
+import { useNavigate} from "react-router-dom";
 
 const AdminBoard = () => {
 
   const userStateSelector = (state) => ({
     fetchAllUsers: state.fetchAllUsers,
+    fetchCurrentUser: state.fetchCurrentUser,
     deleteUser: state.deleteUser,
     currentUserLoading: state.loading,
     users : state.allUsers,
+    currentUser: state.currentUser,
     updateUserRole: state.updateUserRole,
 });
 
-const {fetchAllUsers, deleteUser, currentUserLoading, users, updateUserRole} = useUserStore(userStateSelector);
+  const {fetchAllUsers, fetchCurrentUser, deleteUser, currentUserLoading, users, currentUser, updateUserRole} = useUserStore(userStateSelector);
+  const navigate = useNavigate();
 
   const token = useAuthStore((state) => state.token);
+  console.log(token)
   console.log(users)
 
   useEffect(() => {
+    fetchCurrentUser(token);
+    if (currentUser?.isAdmin === false) {
+      navigate('/posts')
+    }
     fetchAllUsers();
-    },[fetchAllUsers])
+    },[fetchAllUsers, fetchCurrentUser])
 
   if (currentUserLoading) return <Loader/>
 

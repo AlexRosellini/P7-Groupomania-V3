@@ -13,7 +13,7 @@ const login = async (userName, password) => {
   });
   const result = await response.json();
 
-  if(result.token) {
+  if  (result.token) {
     const decoded = await jwt_decode(result.token);
     let { userId } = decoded;
     return { userId, token: result.token };

@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
       const token = req.headers.authorization.split(' ')[1];
       req.token = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
       next();
-
   } catch (error) {
       res.status(401).json({ error: error | 'Requête non authentifiée !'});
   }

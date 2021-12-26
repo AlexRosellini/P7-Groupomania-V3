@@ -4,7 +4,6 @@
 const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/auth')
-const auth = require("../middleware/auth");
 const ValPassword = require('../middleware/validatorPassword'); //Notre middleware de validation
 const ValEmail = require('../middleware/validatorEmail');
 
