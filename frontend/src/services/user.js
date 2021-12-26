@@ -8,8 +8,15 @@ const getUser = async (userId) => {
    return result;
 };
 
-const getAllUsers = async () => {
-  const response = await fetch('http://localhost:3000/api/user/')
+const getAllUsers = async (token) => {
+  const response = await fetch('http://localhost:3000/api/user/', {
+    method: 'GET',
+    credentials: 'include',                
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'content-type': 'application/json'
+    },
+  })
   if (!response.ok) {
     return null;
   }

@@ -18,9 +18,9 @@ const useUserStore = create((set) => ({
     const user = await userService.getUser(userId);
     set({ user, loading: false });
   },
-  fetchAllUsers: async () => {
+  fetchAllUsers: async (token) => {
     set({ loading: true })
-    const allUsers = await userService.getAllUsers();
+    const allUsers = await userService.getAllUsers(token);
     set({ allUsers, loading: false });
   },
   updateUserDesc: async (userId, token, description) => {

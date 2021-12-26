@@ -25,11 +25,11 @@ const AdminBoard = () => {
   console.log(users)
 
   useEffect(() => {
-    fetchCurrentUser(token);
+    fetchCurrentUser();
     if (currentUser?.isAdmin === false) {
       navigate('/posts')
     }
-    fetchAllUsers();
+    fetchAllUsers(token);
     },[fetchAllUsers, fetchCurrentUser])
 
   if (currentUserLoading) return <Loader/>
