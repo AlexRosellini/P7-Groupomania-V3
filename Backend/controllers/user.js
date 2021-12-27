@@ -49,11 +49,25 @@ exports.updateUser = async (req, res) => {
     if (image) {
       User.image = image
     }
+    if (req.body.isAdmin === true) {
+      res.status(400).send({ message : ' Good try. '})
+    }
     const user = await User.update({...req.body, image: image}, {where: {id: id}})
     res.status(200).send(user)  
   }
   catch(error) {
-    res.status(500).send(error)
+    res.status(500).send({ message : 'something went wrong ... ' + error})
+  }
+}
+
+exports.updateUserAdmin = async (req, res) => {
+  try {
+    let id = req.params.id
+    const user = await User.update({...req.body}, {where: {id: id}})
+    res.status(200).send(user)  
+  }
+  catch(error) {
+    res.status(500).send({ message : 'something went wrong ... ' + error})
   }
 }
 

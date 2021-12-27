@@ -45,7 +45,7 @@ const updateUserDesc = async(userId, token, description) => {
 }
 
 const updateUserRole = async(userId, token) => {
-  const response = fetch(`http://localhost:3000/api/user/${userId}`, {
+  const response = fetch(`http://localhost:3000/api/user/admin/${userId}`, {
       method: 'PUT',
       credentials: 'include',                
       headers: {
