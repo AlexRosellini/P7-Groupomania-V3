@@ -38,6 +38,7 @@ const AdminBoard = () => {
     try {
         console.log(userId, token);
         await deleteUser(userId, token);
+        window.location.reload();
     }
     catch (err) {
         console.log(err)

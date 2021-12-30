@@ -6,6 +6,7 @@ import userService from "../services/user";
 const useUserStore = create((set) => ({
   User: null,
   loading: false,
+  currentUser: null,
   fetchCurrentUser: async () => {
     const currentUserId = useAuthStore.getState().userId
         set({ loading: true })

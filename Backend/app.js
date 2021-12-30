@@ -20,14 +20,15 @@ db.authenticate()
     load()
     .then(() => { console.log('OK...')})
     .catch(err => console.log('error' + err))
-    
-//db.sync({force: process.env.NODE_ENV === "dev"}).then(() => {
-//  if(process.env.NODE_ENV) {
-//    runSeeders();
-//  }
-//})
-//  .catch(err => console.log('error' + err));
-//
+
+
+db.sync({force: process.env.NODE_ENV === "dev"}).then(() => {
+  if(process.env.NODE_ENV === "dev") {
+    runSeeders();
+  }
+})
+  .catch(err => console.log('error' + err));
+
 
 
 /*********************************************************************************/

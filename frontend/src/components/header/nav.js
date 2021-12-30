@@ -3,14 +3,15 @@ import {useState, useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import useAuthStore from '../../stores/auth';
 
+
 const Nav = () => {
 
     const logout = useAuthStore(state => state.logout)
+    const token = useAuthStore(state => state.token)
 
     const handleClick = () => {
         logout()
     }
-
     return (  
         <>
         <div className="nav">

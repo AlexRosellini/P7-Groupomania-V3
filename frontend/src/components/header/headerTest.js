@@ -11,11 +11,14 @@ const HeaderTest = () => {
     const logout = useAuthStore(state => state.logout)
     const data = useUserStore(state => state.currentUser);
     const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
+    const token = useAuthStore(state => state.token)
 
     useEffect(() => {
+      if (token) {
         fetchCurrentUser();
         console.log(data);
-    },[]);
+      }
+    },[token]);
 
 
     const handleClick = () => {
