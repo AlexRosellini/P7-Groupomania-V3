@@ -42,9 +42,9 @@ const usePostStore = create((set) => ({
         console.log(result)
     },
     deleteComment: async (id, token) => {
-        set({ loading: true})
+        //set({ loading: true})
         const result = await postService.deleteComment(id, token);
-        set({loading: false})
+        //set({loading: false})
         console.log(result)
     },
 }));

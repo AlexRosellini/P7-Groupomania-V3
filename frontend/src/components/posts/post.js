@@ -97,7 +97,7 @@ const Post = ({ post, isOwner, currentUserId, onComment, onDeletePost, onDeleteC
                     <div className="div">
                       <button
                         className="font-bold  py-2 px-4 bg-red-400  text-white shadow-md"
-                        onClick={() => {
+                        onClick={(e) => {
                             let commentId = comment.id
                             onDeleteComment(commentId)
                         }}

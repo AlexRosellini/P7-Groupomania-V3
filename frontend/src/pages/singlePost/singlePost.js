@@ -27,10 +27,10 @@ const SinglePost = () => {
       fetchOnePost(id, userId);
     }
   }, [id, userId, fetchOnePost]);
-
+ 
   if (loading === true) {
-    return <Loader />;
-  }
+   return <Loader />;
+ }
 
   const handleSubmitComment = async (content) => {
     try {
@@ -43,8 +43,7 @@ const SinglePost = () => {
     }
   };
 
-  const handleDeletePost = (e) => {
-    e.preventDefault();
+  const handleDeletePost = () => {
     deletePost(id, token);
     navigate("/");
   };
