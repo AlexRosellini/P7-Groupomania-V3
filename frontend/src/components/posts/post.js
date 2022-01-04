@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const Post = ({ post, isOwner, currentUserId, onComment, onDeletePost, onDeleteComment, onShowUser }) => {
+const Post = ({ post, isOwner, currentUserId, isAdmin, onComment, onDeletePost, onDeleteComment, onShowUser }) => {
   const [content, setContent] = useState("");
   
   return (
-    <main className="flex-col justify-center bg-gray-900 min-h-screen h-full pt-6 pb-6">
+    <main className="flex-col justify-center bg-gray-400 min-h-screen h-full pt-6 pb-6">
       <div className=" h-fit bg-white mb-6 ml-6 mr-6 mt-12">
         <h1 className="pt-6 mb-6 text-grey-darkest mb-6 underline-offset-auto font-black">
           {" "}
@@ -30,7 +30,7 @@ const Post = ({ post, isOwner, currentUserId, onComment, onDeletePost, onDeleteC
           <p className="ml-6 text-black">
             {post.comments?.length} commentaires
           </p>
-          {isOwner && (
+          {isOwner || isAdmin && (
             <>
               <div className="flex">
                 <NavLink className="w-full" to={`/edit/${post.id}`}>

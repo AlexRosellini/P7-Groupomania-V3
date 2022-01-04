@@ -3,6 +3,7 @@ import Post from "../../components/posts/post";
 import Loader from "../../components/Loader/loader";
 import usePostStore from "../../stores/post";
 import useAuthStore from "../../stores/auth";
+import useUserStore from "../../stores/user"
 import { useNavigate, useParams } from "react-router-dom";
 
 const postStateSelector = (state) => ({
@@ -17,6 +18,8 @@ const postStateSelector = (state) => ({
 const SinglePost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const data = useUserStore(state => state.currentUser);
+  const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser)
   const token = useAuthStore((state) => state.token);
   const userId = useAuthStore((state) => state.userId);
   const { post, fetchOnePost, deletePost, sendComment, loading, deleteComment } =
@@ -25,6 +28,8 @@ const SinglePost = () => {
   useEffect(() => {
     if (userId && id) {
       fetchOnePost(id, userId);
+      fetchCurrentUser();
+      console.log(data?.isAdmin)
     }
   }, [id, userId, fetchOnePost]);
  
@@ -63,6 +68,7 @@ const SinglePost = () => {
       <Post
         post={post}
         isOwner={post.user?.id === userId}
+        isAdmin={data?.isAdmin}
         onComment={handleSubmitComment}
         onDeletePost={handleDeletePost}
         onDeleteComment = {handleDeleteComment}

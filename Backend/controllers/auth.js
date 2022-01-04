@@ -23,7 +23,7 @@ exports.signup = (req, res, next) => {
         errors.push ({text:'please add a password'})
     }
     if (errors.length > 0) {
-        res.json(errors)
+        res.status(400).json({ message : errors})
     }
 
     bcrypt.hash(req.body.password, 10)
@@ -37,10 +37,10 @@ exports.signup = (req, res, next) => {
             image: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
         });
     user.save()
-    .then(() => {res.status(200).json({message: 'success'})})     
-    .catch(error => res.status(400).json({ message : 'something went wrong ... ' + error})) //Sinon un message d'érreur (si même email)
+    .then(() => {res.status(200).json({message: 'Vous pouvez maintenant vous connecter!'})})     
+    .catch(error => res.status(400).json({ message : error})) //Sinon un message d'érreur (si même email)
   })
-  .catch(error => res.status(500).json({ message : 'Something went wrong ... ' + error }))  //Sinon un message d'érreur (si serveur)
+  .catch(error => res.status(500).json({ message : error}))  //Sinon un message d'érreur (si serveur)
 
 }
 

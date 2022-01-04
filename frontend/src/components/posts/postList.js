@@ -5,7 +5,7 @@ const PostList = ({posts}) => {
 
     return ( 
         <>
-            <main className="h-full  flex flex-col justify-center items-center bg-gray-900">
+            <main className="h-full  flex flex-col justify-center items-center bg-gray-400">
             {posts?.map(post => (
                 <NavLink className='w-1/2' key={post.id} to={`/posts/${post.id}`}>
                 <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4" >

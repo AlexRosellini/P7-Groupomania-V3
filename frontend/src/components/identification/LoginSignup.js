@@ -16,7 +16,7 @@ const LoginSignup = ({onRegister, onLogin}) => {
     }, [error])
 
         return ( 
-            <main className="min-h-screen h-full flex flex-col justify-center items-center bg-gray-900">
+            <main className="min-h-screen h-full flex flex-col justify-center items-center bg-gray-400">
                 <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4">
                     <div className="auth__top">
                         <h2>Pour commencer, veuillez vous inscrire ou vous connecter.</h2>

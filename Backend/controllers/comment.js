@@ -4,7 +4,7 @@ exports.modifyComment = async (req, res, next) => {
     try {
         Comment.findOne({where: {id: req.params.id}})
         .then((comment) => {
-            if (comment.userId === req.token.userId) {
+            if (comment.userId === req.token.userId || req.token.isAdmin === true) {
                 Comment.update({...req.body}, {where: {id: req.params.id}})
                 .then((comment) => {res.status(200).json(comment)})     
                 .catch(error => res.status(400).json({ message : 'something went wrong ... ' + error}))    
@@ -29,7 +29,7 @@ exports.createComment = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
     Comment.findOne({where: {id: req.params.id}})
     .then((comment) => {
-      if (comment.userId !== req.token.userId) {
+      if (comment.userId !== req.token.userId || req.token.isAdmin === true) {
         ({ message : 'Unauthorized ' + error}) 
       }
       comment.destroy({where: {id: req.params.id}})

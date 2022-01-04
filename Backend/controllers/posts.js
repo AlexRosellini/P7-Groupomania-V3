@@ -65,19 +65,24 @@ exports.getOnePost = (req, res, next) => {
 
 exports.modifyPost = async (req, res, next) => {
   try {
-    let id = req.params.id
-    let image;
-    console.log(req.file)
-    console.log(req.body)
-    if (req.file) {
-      image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+      Post.findOne({where: {id: req.params.id}})
+        .then((post) => {
+          if (post.userId === req.token.userId || req.token.isAdmin === true) {
+                let id = req.params.id
+          let image;
+          console.log(req.file)
+          console.log(req.body)
+          if (req.file) {
+            image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+          }
+          if (image) {
+            Post.image = image
+          }
+          Post.update({...req.body, image: image}, {where: {id: id}})
+          res.status(200).json(post)  
+        } 
+      })
     }
-    if (image) {
-      Post.image = image
-    }
-    const post = await Post.update({...req.body, image: image}, {where: {id: id}})
-    res.status(200).json(post)  
-  }
   catch(error) {
     res.status(500).send(error)
   }
@@ -110,7 +115,12 @@ exports.createPost = (req, res) => {
 exports.deletePost = (req, res) => {
   Post.findOne({where: {id: req.params.id}})
     .then((post) => {
+      if (post.userId === req.token.userId || req.token.isAdmin === true) {
       post.destroy({where: {id: req.params.id}})
+      }
+      else {
+        res.status(401).json({ message : 'Unauthorized ' + error})
+      }
     })
     .then(() => res.status(200).json({message: 'Post deleted'}))
     .catch((error) => res.status(400).json({error: error}))

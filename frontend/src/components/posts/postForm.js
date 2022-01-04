@@ -12,7 +12,7 @@ const PostForm = ({onSubmit, data}) => {
     
     return (  
         <>
-        <main className="min-h-screen h-full flex flex-col  items-center bg-gray-900">
+        <main className="min-h-screen h-full flex flex-col  items-center bg-gray-400">
                 <form  className="post-form__form border w-1/2" onSubmit={(event) => {
                         event.preventDefault();
                         onSubmit(formData)

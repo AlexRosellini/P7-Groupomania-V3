@@ -36,27 +36,29 @@ exports.oneUser = (req, res, next) => {
 
 /*********************************************************************************/
 //Pour update un utilisateur 
-
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (req, res, next) => {
   try {
-    let id = req.params.id
-    let image;
-    console.log(req.file)
-    console.log(req.body)
-    if (req.file) {
-      image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+      User.findOne({where: {id: req.params.id}})
+        .then((user) => {
+          if (user.id === req.token.userId) {
+          let id = req.params.id
+          let image;
+          if (req.file) {
+            image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+          }
+          if (image) {
+            User.image = image
+          }
+          if (req.body.isAdmin === true) {
+            res.status(401).send({ message : 'Unauthorized.'})
+          }
+          User.update({...req.body, image: image}, {where: {id: id}})
+          res.status(200).json(user)  
+        } 
+      })
     }
-    if (image) {
-      User.image = image
-    }
-    if (req.body.isAdmin === true) {
-      res.status(400).send({ message : ' Good try. '})
-    }
-    const user = await User.update({...req.body, image: image}, {where: {id: id}})
-    res.status(200).send(user)  
-  }
   catch(error) {
-    res.status(500).send({ message : 'something went wrong ... ' + error})
+    res.status(500).send(error)
   }
 }
 

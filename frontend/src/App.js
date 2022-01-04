@@ -5,7 +5,6 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-mui';
 import useAuthStore from "./stores/auth";
 import Layout from "./components/Layout";
-import Landing from "./pages/Landing/Landing";
 import CurrentUserProfile from "./pages/profile/CurrentUserProfile";
 import Profile from "./pages/profile/Profile";
 import MainPage from "./pages/mainPage/mainPage";
@@ -49,7 +48,7 @@ function App() {
         <Router>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<Landing />} exact />
+              <Route path="/" element={<MainPage />} exact />
               <Route path="/login" element={<LoginSignupPage />} />
               <Route
                 path="/posts"
