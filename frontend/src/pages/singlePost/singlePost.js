@@ -29,7 +29,6 @@ const SinglePost = () => {
     if (userId && id) {
       fetchOnePost(id, userId);
       fetchCurrentUser();
-      console.log(data?.isAdmin)
     }
   }, [id, userId, fetchOnePost]);
  
@@ -67,7 +66,8 @@ const SinglePost = () => {
     <>
       <Post
         post={post}
-        isOwner={post.user?.id === userId}
+        isOwner={post?.user?.id === userId}
+        CurrentId={userId}
         isAdmin={data?.isAdmin}
         onComment={handleSubmitComment}
         onDeletePost={handleDeletePost}

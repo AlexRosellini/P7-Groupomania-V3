@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const Post = ({ post, isOwner, currentUserId, isAdmin, onComment, onDeletePost, onDeleteComment, onShowUser }) => {
+const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDeleteComment, onShowUser }) => {
   const [content, setContent] = useState("");
+  console.log(CurrentId)
   
   return (
     <main className="flex-col justify-center bg-gray-400 min-h-screen h-full pt-6 pb-6">
@@ -30,7 +31,7 @@ const Post = ({ post, isOwner, currentUserId, isAdmin, onComment, onDeletePost, 
           <p className="ml-6 text-black">
             {post.comments?.length} commentaires
           </p>
-          {isOwner || isAdmin && (
+          {isOwner || isAdmin ? (
             <>
               <div className="flex">
                 <NavLink className="w-full" to={`/edit/${post.id}`}>
@@ -48,7 +49,7 @@ const Post = ({ post, isOwner, currentUserId, isAdmin, onComment, onDeletePost, 
                 </div>
               </div>
             </>
-          )}
+          ) : ''}
         </div>
       </div>
       <div className="mb-6 ml-6 mr-6 bg-gray-900 ">
@@ -92,7 +93,7 @@ const Post = ({ post, isOwner, currentUserId, isAdmin, onComment, onDeletePost, 
                 {comment.content}{" "}
               </p>
               <div className="btn">
-                {currentUserId === comment.user?.userId && (
+                {CurrentId === comment.userId && (
                   <>
                     <div className="div">
                       <button

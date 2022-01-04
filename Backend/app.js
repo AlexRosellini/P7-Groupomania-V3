@@ -12,6 +12,8 @@ const userRoutes = require('./routes/user'); //Notre router user
 const postRoutes = require('./routes/posts');
 const commentRoutes = require('./routes/comments')
 const {load} = require('./models/index')
+const xss = require('xss-clean'); //Element de sécurité. Aide contre les attaques XSS.
+const rateLimit = require("express-rate-limit"); //Element de sécurité. contrôle le débit de requêttes.
 
 /*********************************************************************************/
 //On ce connect sur notre database
@@ -56,10 +58,17 @@ app.use(express.urlencoded({
 }));
 
 app.use(helmet()); 
-
+app.use(xss());
 app.use(morgan('combined'))
 
 app.use('/images', express.static(path.join(__dirname, 'images'))); //On indique le dossier pour multer
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
