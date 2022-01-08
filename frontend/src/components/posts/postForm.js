@@ -1,11 +1,15 @@
 import {useState} from 'react';
+import { useAlert } from "react-alert";
 
 const PostForm = ({onSubmit, data}) => {
 
-    const [title, setTitle] = useState('');
-    const [textContent, setTextContent] = useState('');
-    const [mediaContent, setMediaContent] = useState('');
+    const [title, setTitle] = useState(null);
+    const [textContent, setTextContent] = useState(null);
+    const [mediaContent, setMediaContent] = useState(null);
     const formData = new FormData();
+    const alert = useAlert();
+    console.log(title)
+
     formData.append('image', mediaContent)
     formData.append('title', title)
     formData.append('textContent', textContent);
@@ -15,7 +19,11 @@ const PostForm = ({onSubmit, data}) => {
         <main className="min-h-screen h-full flex flex-col  items-center bg-gray-400">
                 <form  className="post-form__form border w-1/2" onSubmit={(event) => {
                         event.preventDefault();
+                        if (textContent === null || textContent === "" || title === null || title === '') {
+                            alert.show('Il faut au moins un titre et du texte pour votre message!')
+                        } else {
                         onSubmit(formData)
+                        }
                     }}>
                     <label htmlFor="title" className="post-form__label">
                         Titre:

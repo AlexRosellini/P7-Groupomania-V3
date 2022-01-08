@@ -18,7 +18,7 @@ const Register = ({onRegister}) => {
                 </div>
                 <div>
                   <label for="userName" class="sr-only">Password</label>
-                  <input id="userName" name="userName" type="text" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-4" placeholder="Nom de compte"/>
+                  <input id="userName" name="userName" type="text" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-4" placeholder="Nom de compte"/>
                 </div>
                 <div>
                   <label for="password" class="sr-only">Password</label>
@@ -28,8 +28,7 @@ const Register = ({onRegister}) => {
               <div>
                 <button class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white
                 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={(e) => {
-                    e.preventDefault();
+                onClick={() => {
                     const userName = document.getElementById('userName').value;
                     const email = document.getElementById('email-address').value;
                     const password = document.getElementById('password').value;

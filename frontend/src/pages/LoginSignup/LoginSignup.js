@@ -9,13 +9,14 @@ const Auth = () => {
         token: state.token,
         login: state.login,
         register: state.register,
+        error: state.error
     });
 
     const alert = useAlert();
-    const {token, login, register} = useAuthStore(authStateSelector);
+    const {token, login, register, error} = useAuthStore(authStateSelector);
     let location = useLocation();
   
-    let fallback = location.state?.from?.pathname || "/posts";
+    let fallback = "/posts";
     
     if(token) {
         return <Navigate to={fallback} state={{ from: location }}/>
@@ -31,7 +32,6 @@ const Auth = () => {
             /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)
         ) {
         register(userName, email, password);
-        window.location.reload();  
         } else {
             alert.show('Votre mot de passe doit avoir au moins un chiffre, une majuscule et 8 caractères, votre email doit être valide')
         }

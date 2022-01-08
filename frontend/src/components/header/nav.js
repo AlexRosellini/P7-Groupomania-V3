@@ -11,6 +11,7 @@ const Nav = () => {
 
     const handleClick = () => {
         logout()
+        window.location.reload();
     }
     return (  
         <>
@@ -31,14 +32,16 @@ const Nav = () => {
                         Créer un post
                     </li>
                 </NavLink>
+                {token && 
                 <li className="nav__li" onClick={handleClick}>
                     Logout
-                </li>
-                <NavLink to='/AdminBoard'>
+                </li>}
+                {isAdmin &&
+                    <NavLink to='/AdminBoard'>
                     <li className="nav__li">
                         Admin
                     </li>
-                </NavLink>
+                </NavLink>}
             </ul>
         </div>
         </>

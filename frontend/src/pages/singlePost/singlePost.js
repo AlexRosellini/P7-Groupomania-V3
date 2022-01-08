@@ -52,9 +52,8 @@ const SinglePost = () => {
     navigate("/");
   };
 
-  const handleDeleteComment = (commentId) => {
-    deleteComment(commentId, token);
-    window.location.reload();
+  const handleDeleteComment = (id) => {
+    deleteComment(id, token);
   }
 
   const handleShowUser = () => {

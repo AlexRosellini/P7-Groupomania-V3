@@ -36,6 +36,7 @@ const register = async (userName, email, password) => {
 })
   const result = await response.json();
   console.log(result)
+  return result
 }
 
 export default {

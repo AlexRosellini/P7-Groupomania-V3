@@ -8,23 +8,27 @@ import Register from './register';
 const LoginSignup = ({onRegister, onLogin}) => {
     const alert = useAlert();
     const error = useAuthStore(state => state.error);
+    const errorInsc = useAuthStore(state => state.errorInsc)
 
     useEffect(() => {
         if(error) {
             alert.show(error)
         }
-    }, [error])
+        if(errorInsc) {
+            alert.show(errorInsc)
+        }
+    }, [error, errorInsc])
 
         return ( 
             <main className="min-h-screen h-full flex flex-col justify-center items-center bg-gray-400">
-                <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4">
+                <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4 flex justify-center items-center h-auto">
                     <div className="auth__top">
                         <h2>Pour commencer, veuillez vous inscrire ou vous connecter.</h2>
                         <Tabs>
                             <div className="">
                                 <TabList className="flex justify-center items-center my-4">
-                                    <Tab className="py-2 px-4 text-gray-500 border-b-8">Se connecter</Tab>
-                                    <Tab className="py-2 px-4 text-gray-500 border-b-8">S'enregistrer</Tab>
+                                    <Tab className="py-2 px-4 text-gray-500 border-b-8 cursor-pointer">Se connecter</Tab>
+                                    <Tab className="py-2 px-4 text-gray-500 border-b-8 cursor-pointer">S'enregistrer</Tab>
                                 </TabList>
                             </div>
                             <div className="">
