@@ -3,6 +3,7 @@ import CurrUserProfile from '../../components/Profile/CurrUserProfile';
 import Loader from "../../components/Loader/loader";
 import useAuthStore from '../../stores/auth';
 import useUserStore from '../../stores/user';
+import { useAlert } from "react-alert";
 
 const Profile = () => {
     const userStateSelector = (state) => ({
@@ -13,6 +14,7 @@ const Profile = () => {
       currentUserLoading: state.loading,
   });
 
+  const alert = useAlert();
   const {data, fetchCurrentUser, updateUserDesc, updateUserPicture, currentUserLoading} = useUserStore(userStateSelector);
     const token = useAuthStore(state => state.token);
     const userId = data?.id
@@ -25,8 +27,12 @@ const Profile = () => {
   
   const handleDesc = (description) => {    
       try {
-         updateUserDesc(userId, token, description)          
-         window.location.reload();
+         if (description.length > 150) {
+          alert.show('Votre description doit faire moins de 150 caractères')
+         } else {
+          updateUserDesc(userId, token, description)          
+          window.location.reload();
+         }
       }
       catch (error) {
           console.log(error)

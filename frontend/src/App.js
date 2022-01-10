@@ -26,6 +26,7 @@ const alertOptions = {
 
 const RequireAuth = ({ children }) => {
   const token = useAuthStore((state) => state.token);
+  console.log(token)
   let location = useLocation();
 
   if (!token) {
@@ -48,10 +49,10 @@ function App() {
         <Router>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<MainPage />} exact />
               <Route path="/login" element={<LoginSignupPage />} />
               <Route
-                path="/posts"
+                path="/"
+                exact
                 element={
                   <RequireAuth>
                     <MainPage />

@@ -19,6 +19,7 @@ const useAuthStore = create((set) => ({
   },
   login: async (userName, password) => {
     set({error: null})
+    set({errorInsc: null})
     const result = await authService.login(userName, password);
     console.log(result)
 
@@ -34,6 +35,8 @@ const useAuthStore = create((set) => ({
     const result = await authService.register(userName, password, email); 
     if (result.error) {
       return set({ errorInsc: result.error });
+    } else {
+      window.location.reload();
     }
   },
   logout: () => {

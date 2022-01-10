@@ -52,7 +52,7 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
           ) : ''}
         </div>
       </div>
-      <div className="mb-6 ml-6 mr-6 bg-gray-900 ">
+      <div className="mb-6 ml-6 mr-6  ">
         <div>
           <input type="hidden" />
           <textarea
@@ -73,7 +73,7 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
           </button>
         </div>
         {post.comments?.map((comment) => (
-          <div id="task-comments" className="pt-4 mb-4">
+          <div id="task-comments" className="pt-4 mb-4" key={comment?.id}>
             <div className="bg-white  p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
               <div className="flex flex-row justify-center mr-2">
                 <img
@@ -97,10 +97,11 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
                   <>
                     <div className="div">
                       <button
-                        className="font-bold  py-2 px-4 bg-red-400  text-white shadow-md"
+                        className="font-bold mt-4 py-2 px-4 bg-red-400  text-white shadow-md"
                         onClick={() => {
                             let id = comment.id
                             onDeleteComment(id)
+                            window.location.reload()
                         }}
                       >
                         Delete Comment

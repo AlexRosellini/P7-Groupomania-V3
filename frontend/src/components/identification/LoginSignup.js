@@ -21,7 +21,7 @@ const LoginSignup = ({onRegister, onLogin}) => {
 
         return ( 
             <main className="min-h-screen h-full flex flex-col justify-center items-center bg-gray-400">
-                <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4 flex justify-center items-center h-auto">
+                <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4 flex justify-center items-center h-auto ml-4 mr-4">
                     <div className="auth__top">
                         <h2>Pour commencer, veuillez vous inscrire ou vous connecter.</h2>
                         <Tabs>

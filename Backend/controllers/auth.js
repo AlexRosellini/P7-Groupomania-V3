@@ -15,6 +15,9 @@ exports.signup = (req, res, next) => {
         if (user) {
             return res.status(403).json({error: 'Vous êtes déjà inscrit!'})
         } else {
+            if (req.body.userName === '') {
+                return res.status(400).json({error: 'votre nom ne doit pas être vide'})
+            } else {
             bcrypt.hash(req.body.password, 10)
             .then(hash => {
                 const user = new User({
@@ -29,6 +32,7 @@ exports.signup = (req, res, next) => {
             })
             .then(() => {res.status(200).json({message: 'Vous pouvez maintenant vous connecter!'})})     
             .catch(error => res.status(400).json({ error : 'something went wrong ... ' + error})) //Sinon un message d'érreur (si même email)        
+            }
         }
     })
     .catch(error => res.status(500).json({ error : 'something went wrong ... ' + error}))  //Sinon un message d'érreur (si serveur)

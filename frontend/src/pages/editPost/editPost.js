@@ -11,7 +11,7 @@ const EditPostPage = () => {
 
   const handleSubmit = async (formData) => {
       await editPost(id, token, formData);
-      navigate('/posts')  
+      navigate('/')  
   }
 
   return (

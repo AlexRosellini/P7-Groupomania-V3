@@ -29,11 +29,12 @@ exports.createComment = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
     Comment.findOne({where: {id: req.params.id}})
     .then((comment) => {
-      if (comment.userId !== req.token.userId || req.token.isAdmin === true) {
-        ({ message : 'Unauthorized ' + error}) 
+      if (comment.userId !== req.token.userId || req.token.isAdmin === false) {
+        res.status(400).json({ error : 'Unauthorized'})
+      } else {
+        comment.destroy({where: {id: req.params.id}})
       }
-      comment.destroy({where: {id: req.params.id}})
     })
     .then(() => res.status(200).json({message: 'comment deleted'}))
-    .catch((error) => ({ message : 'something went wrong ... ' + error})) 
+    .catch((error) => res.status(500).json({ error : 'something went wrong ... ' + error})) 
 }
