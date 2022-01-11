@@ -2,6 +2,25 @@ import { NavLink } from "react-router-dom";
 
 
 const PostList = ({posts}) => {
+	let date = (createdAt) => {
+		var date = new Date(createdAt);
+		return date
+	}
+	if(!posts || posts.length === 0) {
+		return (
+			<>
+			<main className="h-screen flex flex-col pt-40 items-center bg-gray-400">
+				<NavLink className='w-1/2' to={`/create`}>
+            	    <div className="border bg-white mt-6 mb-6 rounded-2xl p-4" >
+						<p>
+							aucun post pour le moment, vous pouvez en créer un en cliquant ici!
+						</p>
+					</div>
+				</NavLink>
+			</main>
+			</>
+		)
+	}
 
     return ( 
         <>
@@ -15,7 +34,9 @@ const PostList = ({posts}) => {
                          className="object-cover bg-yellow-500 rounded-full h-10"/>
                         <div className="flex flex-col">
 					        <p className="mb-2 capitalize"> {post.user.userName} </p>
-					        <time dateTime="06-08-21" className="text-gray-400 text-xs">{post.createdAt}
+					        <time className="text-gray-400 text-xs">{() => {
+								date(post?.createdAt)
+							}}
 					        </time>
 				        </div>
                     </div>

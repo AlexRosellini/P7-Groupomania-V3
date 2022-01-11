@@ -9,8 +9,7 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
     <main className="flex-col justify-center bg-gray-400 min-h-screen h-full pt-6 pb-6">
       <div className=" h-fit bg-white mb-6 ml-6 mr-6 mt-12">
         <h1 className="pt-6 mb-6 text-grey-darkest mb-6 underline-offset-auto font-black">
-          {" "}
-          {post.title}{" "}
+          {post.title}
         </h1>
         <NavLink to={`/profile/${post.user?.id}`}></NavLink>
         <p
@@ -24,8 +23,7 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
            <img src={post.image}/>
         </div> : ''}
         <p className="text-gray-600  text-center mb-4 mt-4 text-center">
-          {" "}
-          {post.textContent}{" "}
+          {post.textContent}
         </p>
         <div className="flex-col">
           <p className="ml-6 text-black">
