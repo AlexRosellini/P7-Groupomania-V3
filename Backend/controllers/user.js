@@ -66,26 +66,33 @@ exports.updateUser = async (req, res, next) => {
   }
 }
 
+/*********************************************************************************/
+//Pour rendre un utilisateur Admin
+
 exports.updateUserAdmin = async (req, res) => {
   try {
-    let id = req.params.id
-    const user = await User.update({...req.body}, {where: {id: id}})
-    res.status(200).send(user)  
+    let id = req.params.id //On met en place notre variable d'ID
+    const user = await User.update({...req.body}, {where: {id: id}}) //Et on update notre user
+    res.status(200).send(user)  //si tout va bien, message de succès
   }
   catch(error) {
-    res.status(500).send({ message : 'something went wrong ... ' + error})
+    res.status(500).send({ message : 'something went wrong ... ' + error}) //Sinon un message d'érreur'
   }
 }
 
+/*********************************************************************************/
+//Pour supprimer un utilisateur
+
 exports.deleteUser =  (req, res) => {
   try {
-    let id = req.params.id;
-    User.findOne({where: {id: id}})
-    .then((user) => {
-      user.destroy({where: {id: req.params.id}})
+    let id = req.params.id; //On met en place notre variable d'id.
+    User.findOne({where: {id: id}}) //On cherche ensuite l'utilisateur à supprimer...
+    res.status(200).json({message: 'success'})  //si tout va bien, message de succès
+    .then((user) => { 
+      user.destroy({where: {id: req.params.id}}) //...Et on le delete de la DB.
     })
   }
   catch(error) {
-    res.status(500).send(error)
+    res.status(500).send(error) //sinon un message d'érreur'
   }
 }

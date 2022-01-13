@@ -1,5 +1,11 @@
+/*********************************************************************************/
+//On importe ce dont nous avons besoin.
+
 const Sequelize = require('sequelize');
 const db = require ('../config/database')
+
+/*********************************************************************************/
+//Notre modèle de post.
 
 const Post = db.define('post', {
     title: {

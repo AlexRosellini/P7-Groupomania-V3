@@ -1,8 +1,14 @@
-const bcrypt = require("bcrypt");
-const User = require("../models/user");
+/*********************************************************************************/
+//On importe ce dont nous avons besoin.
 
-const userSeeder = async () => {
-  console.info("users seeded");
+const bcrypt = require("bcrypt"); //Bcrypt hash les passwords.
+const User = require("../models/user"); //Modèle d'utilisateur.
+
+/*********************************************************************************/
+//On importe ce dont nous avons besoin.
+
+const userSeeder = async () => { //créer des templates dans la DB sur initialisation.
+  console.info("users seeding"); //Quand ça commence, on annonce que c'est bon.
 
   const users = [
     {
@@ -23,9 +29,9 @@ const userSeeder = async () => {
     },
   ];
 
-  await User.bulkCreate(users);
+  await User.bulkCreate(users); //On créer nos template utilisateurs.
 
-  console.info("users seeded");
+  console.info("users seeded"); //Avant de confirmer que c'est terminé.
 };
 
 module.exports = userSeeder;

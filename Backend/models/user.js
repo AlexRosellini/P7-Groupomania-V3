@@ -1,5 +1,11 @@
+/*********************************************************************************/
+//On importe ce dont nous avons besoin.
+
 const Sequelize = require('sequelize');
 const db = require ('../config/database')
+
+/*********************************************************************************/
+//Notre modèle d'utilisateur
 
 const User = db.define('user', {
     userName: {

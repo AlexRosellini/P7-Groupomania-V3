@@ -8,10 +8,9 @@ const multer = require('../middleware/multer-config')
 const commentCtrl = require('../controllers/comment')
 
 /*********************************************************************************/
-//On créer nos routes
+//On créer nos routes commentaires
 
 router.post("/:id", auth, multer, commentCtrl.createComment);
-router.put('/:id', auth, multer, commentCtrl.modifyComment);
 router.delete('/:id', auth, commentCtrl.deleteComment);
 
 /*********************************************************************************/

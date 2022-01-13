@@ -10,6 +10,6 @@ module.exports = (req, res, next) => {
     if (!passwordSchema.validate(req.body.password)) { //Si le mot de passe n'est pas valide d'après notre modele.
         res.status(400).json({error : 'Votre mot de passe doit avoir au moins un chiffre, et une majuscule, avec aucun espace!'}) //Message donner à l'utilisateur.
     } else {
-        next();
+        next(); //si tout va bien, next.
     } 
 }

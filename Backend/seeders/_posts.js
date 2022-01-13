@@ -1,7 +1,13 @@
-const Post = require("../models/post");
+/*********************************************************************************/
+//On importe ce dont nous avons besoin.
 
-const postSeeder = async () => {
-  console.info("postSeeded");
+const Post = require("../models/post"); //modèle post
+
+/*********************************************************************************/
+//Notre seeder post
+
+const postSeeder = async () => { //créer des templates dans la DB sur initialisation.
+  console.info("post Seeding"); //Quand ça commence, on annonce que c'est bon.
 
   const posts = [
     {
@@ -18,9 +24,9 @@ const postSeeder = async () => {
       },
   ];
 
-  await Post.bulkCreate(posts);
+  await Post.bulkCreate(posts); //Et on créer nos posts.
 
-  console.info("posts seeded");
+  console.info("posts seeded"); //Avant de confirmer que c'est terminé.
 };
 
 module.exports = postSeeder;

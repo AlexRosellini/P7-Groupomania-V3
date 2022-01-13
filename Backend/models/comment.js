@@ -1,7 +1,13 @@
-const Sequelize = require('sequelize');
-const db = require ('../config/database')
+/*********************************************************************************/
+//On importe ce dont nous avons besoin.
 
-const Comment = db.define('comment', {
+const Sequelize = require('sequelize'); //Sequelize pour gêrer la DB.
+const db = require ('../config/database') //La dite database.
+
+/*********************************************************************************/
+//Notre modèle commentaire
+
+const Comment = db.define('comment', { //Notre modèle de commentaire
     content: {
         type: Sequelize.STRING,
     },
