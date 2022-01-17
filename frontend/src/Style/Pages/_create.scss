@@ -1,0 +1,31 @@
+.post-form {
+    display: flex;
+    justify-content: center;
+    background-color: $background;
+    min-height: 100vh;
+
+    &__form {
+        @include margin-top-bottom-large;
+        @include padding-top-bottom-large;
+        @include padding-left-right-large;
+        width: 80%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        background-color: $card;    
+    }
+    & textarea {
+        @include margin-top-small;
+        height: 100px;
+        resize: none;
+    }
+
+    &__label {
+        @include padding-top-bottom-small;
+    }
+
+    &__input {
+        @include padding-left-right-small;
+        @include padding-top-bottom-small;
+    }
+}
