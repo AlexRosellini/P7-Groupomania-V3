@@ -1,3 +1,6 @@
+/*************************************************/
+//Notre component
+
 const OtherUser = ({profile}) => {
     
     return ( 

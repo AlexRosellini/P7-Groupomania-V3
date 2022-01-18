@@ -1,10 +1,16 @@
+/*************************************************/
+//On Importe ce dont on a besoin.
+
 import {useState} from 'react';
 
-const CurrUserProfile = ({profile, onDescChange, onPicChange}) => {
+/*************************************************/
+//Notre component
 
-    const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
-    const formData = new FormData();
+const CurrUserProfile = ({profile, onDescChange, onPicChange}) => { //On recupère de la page.
+
+    const [description, setDescription] = useState(''); //On set le hook description
+    const [image, setImage] = useState(''); //On set le hook image
+    const formData = new FormData(); //On set le formData
 
     return ( 
         <main className="bg-gray-400 pt-4 pb-4">
@@ -22,15 +28,15 @@ const CurrUserProfile = ({profile, onDescChange, onPicChange}) => {
                                 text-gray-700 border border-solid border-gray-300 rounded
                                 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                                 onChange={event => {
-                                    const file = event.target.files[0];
-                                    setImage(file)
+                                    const file = event.target.files[0]; //On recupère le file
+                                    setImage(file) //et on l'ajoute au hook file.
                                 }}/>
                             <button className="lg:w-1/4 flex justify-center py-2 px-4 border border-transparent text-sm font-medium  text-white
                             bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
                             onClick={(event) => {
-                                event.preventDefault();
-                                formData.append('image', image)
-                                onPicChange(formData)
+                                event.preventDefault(); //On empêche le reload par défault
+                                formData.append('image', image) //On ajoute l'image au formData
+                                onPicChange(formData)  //et on utilise la fonction pour changer la photo de notre page.
                             }}>
                             Changer photo de profil</button>
                         </div>
@@ -40,14 +46,13 @@ const CurrUserProfile = ({profile, onDescChange, onPicChange}) => {
                             <input type="text" className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500
                              text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mt-4"
                              onChange={(e) => {
-                                setDescription(e.target.value)
+                                setDescription(e.target.value) //On recupère la description
                             }}/>
                             <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white
                             bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             onClick={(e) => {
-                                console.log(description)
-                                e.preventDefault();
-                                onDescChange(description)
+                                e.preventDefault(); //On empêche le reload par défaut.
+                                onDescChange(description) //On utilise la fonction pour changer la description de notre page.
                             }}>Changer votre bio!</button>
                         </div>
         	    	</div>

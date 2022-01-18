@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDeleteComment, onShowUser }) => {
-  const [content, setContent] = useState("");
-  console.log(CurrentId)
+const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDeleteComment, onShowUser }) => { //On récupère de notre page
+  const [content, setContent] = useState(""); //On set le hook content
   
   return (
     <main className="flex-col justify-center bg-gray-400 min-h-screen h-full pt-6 pb-6">
@@ -11,17 +10,16 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
         <h1 className="pt-6 mb-6 text-grey-darkest mb-6 underline-offset-auto font-black">
           {post.title}
         </h1>
-        <NavLink to={`/profile/${post.user?.id}`}></NavLink>
+        <NavLink to={`/profile/${post.user?.id}` /*Lien vers profile*/}></NavLink> 
         <p
-          onClick={() => onShowUser()}
+          onClick={() => onShowUser()} //Fonction qui envoie sur le profile du créateur du post.
           className="text-purple-600 hover:text-purple-700  font-semibold text-center pb-6 cursor-pointer"
         >
           {post.user?.userName}
         </p>
-        <span></span>
-        {post.image ? <div className="flex justify-center h-80">
-           <img src={post.image}/>
-        </div> : ''}
+        {post.image ? <div className="flex justify-center h-80"> 
+           <img src={post.image} alt={post.title}/> 
+        </div> : ''}  {/*Si il y a une image, elle es sur le post, sinon on laisse vide.*/}
         <p className="text-gray-600  text-center mb-4 mt-4 text-center">
           {post.textContent}
         </p>
@@ -29,10 +27,10 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
           <p className="ml-6 text-black">
             {post.comments?.length} commentaires
           </p>
-          {isOwner || isAdmin ? (
+          {isOwner || isAdmin ? ( //Si l'utilisateur est le owner du post, ou un admin il voit les boutons.
             <>
               <div className="flex">
-                <NavLink className="w-full" to={`/edit/${post.id}`}>
+                <NavLink className="w-full" to={`/edit/${post.id}`}/*On renvoie vers l'édition de post.*/> 
                   <button className="font-bold  py-2 px-4 w-full bg-purple-400  text-white shadow-md">
                     Edit Post
                   </button>
@@ -40,7 +38,7 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
                 <div className="w-full">
                   <button
                     className="font-bold  py-2 px-4 w-full bg-red-400  text-white shadow-md"
-                    onClick={onDeletePost}
+                    onClick={onDeletePost} //On utilise deletePost de la page.
                   >
                     Delete Post
                   </button>
@@ -60,17 +58,17 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
             rows="6"
             id="comment_content"
             onChange={(e) => {
-              setContent(e.target.value);
+              setContent(e.target.value); //On récupère le contenu du commentaire input.
             }}
           />
           <button
-            onClick={() => onComment(content)}
+            onClick={() => onComment(content)} //Et on le post avec onComment qui vient de la page.
             className="font-bold py-2 px-4 w-full bg-purple-400  text-white shadow-md"
           >
-            Comment{" "}
+            Comment
           </button>
         </div>
-        {post.comments?.map((comment) => (
+        {post.comments?.map((comment) => ( //On map les commentaires du post
           <div id="task-comments" className="pt-4 mb-4" key={comment?.id}>
             <div className="bg-white  p-3  flex flex-col justify-center items-center md:items-start shadow-lg mb-4">
               <div className="flex flex-row justify-center mr-2">
@@ -82,24 +80,22 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
                   src={comment.user?.image}
                 />
                 <h3 className="text-purple-600 font-semibold text-center md:text-left ">
-                  {" "}
-                  {comment.user?.userName}{" "}
+                  {comment.user?.userName}
                 </h3>
               </div>
               <p className="text-gray-600  text-center md:text-left">
-                {" "}
-                {comment.content}{" "}
+                {comment.content}
               </p>
               <div className="btn">
-                {CurrentId === comment.userId && (
+                {CurrentId === comment.userId && ( //Si l'user est propriètaire du commentaire; il voit le bouton.
                   <>
                     <div className="div">
                       <button
                         className="font-bold mt-4 py-2 px-4 bg-red-400  text-white shadow-md"
                         onClick={() => {
                             let id = comment.id
-                            onDeleteComment(id)
-                            window.location.reload()
+                            onDeleteComment(id) //On utilise delete comment de notre page
+                            window.location.reload() //et on recharge la page.
                         }}
                       >
                         Delete Comment

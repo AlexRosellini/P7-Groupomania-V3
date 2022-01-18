@@ -1,6 +1,12 @@
+/*************************************************/
+//On Importe ce dont on a besoin.
+
 import icon from '../../imgs/logo/icon.png';
 
-const Register = ({onRegister}) => {    
+/*************************************************/
+//Notre component
+
+const Register = ({onRegister}) => {  //On récupère de loginSignup  
     return ( 
         <>
         <div class="max-w-md w-full space-y-8">
@@ -28,11 +34,11 @@ const Register = ({onRegister}) => {
               <div>
                 <button class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white
                 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onClick={() => {
-                    const userName = document.getElementById('userName').value;
-                    const email = document.getElementById('email-address').value;
-                    const password = document.getElementById('password').value;
-                    onRegister(userName, email, password)
+                onClick={() => { 
+                    const userName = document.getElementById('userName').value; //On récupère l'userName
+                    const email = document.getElementById('email-address').value; //On récupère l'Email
+                    const password = document.getElementById('password').value; //On récupère le password
+                    onRegister(userName, email, password) //et on utilise la fonction register
                 }}>
                   <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                     <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

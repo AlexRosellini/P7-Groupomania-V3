@@ -6,7 +6,7 @@ import AlertTemplate from 'react-alert-template-mui';
 import useAuthStore from "./stores/auth";
 import Layout from "./components/Layout";
 import CurrentUserProfile from "./pages/profile/CurrentUserProfile";
-import Profile from "./pages/profile/Profile";
+import Profile from "./pages/profile/profile";
 import MainPage from "./pages/mainPage/mainPage";
 import CreatePost from "./pages/createPost/createPost";
 import LoginSignupPage from "./pages/LoginSignup/LoginSignup";

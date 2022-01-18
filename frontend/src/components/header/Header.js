@@ -1,3 +1,6 @@
+/*************************************************/
+//On Importe ce dont on a besoin.
+
 import React from "react";
 import {useEffect} from "react";
 import { NavLink } from "react-router-dom";
@@ -5,25 +8,26 @@ import useAuthStore from '../../stores/auth';
 import useUserStore from '../../stores/user';
 import icon from '../../imgs/logo/icon.png';
 
+/*************************************************/
+//Notre component
 
 const Header = () => {
 
-    const logout = useAuthStore(state => state.logout)
-    const data = useUserStore(state => state.currentUser);
-    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser);
-    const token = useAuthStore(state => state.token)
+    //On récupère des éléments de nos stores...
+    const logout = useAuthStore(state => state.logout) //fonction logout
+    const data = useUserStore(state => state.currentUser); //utilisateur 
+    const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser); //fonction pour récuperer l'utilisateur
+    const token = useAuthStore(state => state.token) //Le token de l'utilisateur.
 
     useEffect(() => {
-      if (token) {
-        fetchCurrentUser();
-        console.log(data);
+      if (token) { //Si on a un token.
+        fetchCurrentUser(); //On l'utilise pour récuperer l'utilisateur.
       }
     },[]);
 
-
-    const handleClick = () => {
-        logout();
-        window.location.reload();
+    const handleClick = () => { 
+        logout(); //On utilise la fonction logout du store.
+        window.location.reload(); //et on recharge la page.
     }
 
     return ( 
@@ -38,6 +42,7 @@ const Header = () => {
                 <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to={`/MyProfile`}>Profile</NavLink>
                 <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='/'>Posts</NavLink>
                 <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='/create'>Créer un post</NavLink>
+                { /*Si on a le token / nos données.*/}
                 {token && <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='#' onClick={handleClick}>logout</NavLink>}
                 {data?.isAdmin ? <NavLink className="block mt-4 ml-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-purple-800" to='/AdminBoard'>Admin</NavLink> : ''}
               </div>

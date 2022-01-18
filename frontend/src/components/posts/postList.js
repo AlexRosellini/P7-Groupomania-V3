@@ -1,16 +1,17 @@
+/*************************************************/
+//On Importe ce dont on a besoin.
+
 import { NavLink } from "react-router-dom";
 
+/*************************************************/
+//Notre component
 
-const PostList = ({posts}) => {
-	let date = (createdAt) => {
-		var date = new Date(createdAt);
-		return date
-	}
-	if(!posts || posts.length === 0) {
-		return (
+const PostList = ({posts}) => { //On récupère de la page.
+	if(!posts || posts.length === 0) { //Si aucun post existe, on utilise le html/css si-dessous.
+		return ( 
 			<>
 			<main className="h-screen flex flex-col pt-40 items-center bg-gray-400">
-				<NavLink className='w-1/2' to={`/create`}>
+				<NavLink className='w-1/2' to={`/create`}> 
             	    <div className="border bg-white mt-6 mb-6 rounded-2xl p-4" >
 						<p>
 							aucun post pour le moment, vous pouvez en créer un en cliquant ici!
@@ -25,7 +26,7 @@ const PostList = ({posts}) => {
     return ( 
         <>
             <main className="h-full  flex flex-col justify-center items-center bg-gray-400">
-            {posts?.map(post => (
+            {posts?.map(post => ( //On map les posts.
                 <NavLink className='w-1/2' key={post.id} to={`/posts/${post.id}`}>
                 <div className="border  bg-white mt-6 mb-6 rounded-2xl p-4" >
                 <div className="flex items-center justify-between">
@@ -34,10 +35,6 @@ const PostList = ({posts}) => {
                          className="object-cover bg-yellow-500 rounded-full h-10"/>
                         <div className="flex flex-col">
 					        <p className="mb-2 capitalize"> {post.user.userName} </p>
-					        <time className="text-gray-400 text-xs">{() => {
-								date(post?.createdAt)
-							}}
-					        </time>
 				        </div>
                     </div>
                     <div className="bg-gray-100	rounded-full h-3.5 flex	items-center justify-center">
