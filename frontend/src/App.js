@@ -1,3 +1,6 @@
+/*************************************************/
+//On import ce dont on à besoin
+
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navigate, useLocation } from "react-router";
@@ -14,6 +17,9 @@ import SinglePost from "./pages/singlePost/singlePost";
 import EditPostPage from "./pages/editPost/editPost";
 import AdminBoard from "./pages/Admin/AdminBoard"
 
+/*************************************************/
+//Configuration d'alertes.
+
 // optional configuration
 const alertOptions = {
   // you can also just use 'bottom center'
@@ -24,28 +30,35 @@ const alertOptions = {
   transition: transitions.SCALE
 }
 
-const RequireAuth = ({ children }) => {
-  const token = useAuthStore((state) => state.token);
-  console.log(token)
-  let location = useLocation();
+/*************************************************/
+//On set nos routes sécurisées.
+
+
+const RequireAuth = ({ children }) => {  //Notre "Require Auth" qui sécurise nos routes
+  const token = useAuthStore((state) => state.token);  //On a besoin du token
+  let location = useLocation(); //et de la location.
 
   if (!token) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/login" state={{ from: location }} />; //On renvoie vers notre page de login si le token n'est pas présent.
   }
 
   return children;
 };
 
+/*************************************************/
+//Notre application
+
+
 function App() {
-  const retrieveToken = useAuthStore((state) => state.retrieveTokenUserId);
+  const retrieveToken = useAuthStore((state) => state.retrieveTokenUserId); //fonction pour recupérer le token depuis le store
 
   useEffect(() => {
-    retrieveToken();
+    retrieveToken(); //et on appelle la fonction pour le token.
   }, []);
 
   return (
     <>
-      <AlertProvider template={AlertTemplate} {...alertOptions}>
+      <AlertProvider template={AlertTemplate} {...alertOptions} /*Template d'alertes*/> 
         <Router>
           <Routes>
             <Route element={<Layout />}>
