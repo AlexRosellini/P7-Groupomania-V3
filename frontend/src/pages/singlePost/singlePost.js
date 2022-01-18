@@ -1,3 +1,6 @@
+/*************************************************/
+//On Importe ce dont on a besoin.
+
 import React, {useEffect } from "react";
 import Post from "../../components/posts/post";
 import Loader from "../../components/Loader/loader";
@@ -6,7 +9,10 @@ import useAuthStore from "../../stores/auth";
 import useUserStore from "../../stores/user"
 import { useNavigate, useParams } from "react-router-dom";
 
-const postStateSelector = (state) => ({
+/*************************************************/
+//Notre page
+
+const postStateSelector = (state) => ({ //On set un stateSelector pour recupérer les données du store.
   post: state.currentPost,
   fetchOnePost: state.getOnePost,
   deletePost: state.deletePost,
@@ -16,19 +22,20 @@ const postStateSelector = (state) => ({
 });
 
 const SinglePost = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const data = useUserStore(state => state.currentUser);
-  const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser)
-  const token = useAuthStore((state) => state.token);
-  const userId = useAuthStore((state) => state.userId);
+  const { id } = useParams(); //On recupère l'id depuis params.
+  const navigate = useNavigate(); //On set navigate pour renvoyer les utilisateurs.
+  const data = useUserStore(state => state.currentUser); //On recupère data depuis userstore
+  const fetchCurrentUser = useUserStore(state => state.fetchCurrentUser) //et le currentuser depuis userstore
+  const token = useAuthStore((state) => state.token); //on recupère le token de auth.
+  const userId = useAuthStore((state) => state.userId); //on recupère l'userId de auth.
+
   const { post, fetchOnePost, deletePost, sendComment, loading, deleteComment } =
     usePostStore(postStateSelector);
 
   useEffect(() => {
-    if (userId && id) {
-      fetchOnePost(id, userId);
-      fetchCurrentUser();
+    if (userId && id) { //If both userId and Id are availiable
+      fetchOnePost(id, userId); //we fetch the post
+      fetchCurrentUser(); //as well as the currentUser 
     }
   }, [id, userId, fetchOnePost]);
  
@@ -36,34 +43,32 @@ const SinglePost = () => {
    return <Loader />;
  }
 
-  const handleSubmitComment = async (content) => {
+  const handleSubmitComment = async (content) => { //Notre fonction pour envoyer commentaire.
     try {
-      console.log(content);
-      console.log(id);
-      await sendComment(id, token, content);
-      await fetchOnePost(id, userId);
+      await sendComment(id, token, content); //On envoie le commentaire 
+      await fetchOnePost(id, userId); //et on recupère le nouveau post.
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleDeletePost = () => {
-    deletePost(id, token);
-    navigate("/");
+  const handleDeletePost = () => { //Fonction pour delete le post.
+    deletePost(id, token); //fonction pour delete le post depuis le store.
+    navigate("/"); //On renvoie l'utilisateur vers /, (nos posts)
   };
 
-  const handleDeleteComment = (id) => {
-    deleteComment(id, token);
+  const handleDeleteComment = (id) => { //Fonction pou delete comments
+    deleteComment(id, token); //On delete comment depuis store
   }
 
-  const handleShowUser = () => {
-    console.log("show user");
-    navigate(`/profile/${post.user?.id}`);
+  const handleShowUser = () => { //fonction qui renvoie vers l'utilisateur
+    console.log("show user"); 
+    navigate(`/profile/${post.user?.id}`); //on utilise navigate pour faire le renvoi.
   };
 
   return (
     <>
-      <Post
+      <Post //On envoie les données vers le component.
         post={post}
         isOwner={post?.user?.id === userId}
         CurrentId={userId}
