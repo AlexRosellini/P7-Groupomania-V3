@@ -20,7 +20,7 @@ const CreatePost = () => {
     const handleSubmit = async (formData) => { //Notre fonction qui créer le post.
         try {            
             await sendPost(token,formData)  //On utilise sendPost du store.
-            navigate('/posts') //Et on renvoie les utilisateurs vers /posts.
+            navigate('/') //Et on renvoie les utilisateurs vers /.
         }
         catch(e) {
             console.log(e) //Si erreur, on log l'érreur.

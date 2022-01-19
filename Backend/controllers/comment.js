@@ -23,12 +23,12 @@ exports.createComment = (req, res, next) => {
 exports.deleteComment = (req, res, next) => {
     Comment.findOne({where: {id: req.params.id}}) //On commence par trouver le commentaire à supprimer
     .then((comment) => { 
-      if (comment.userId !== req.token.userId || req.token.isAdmin === false) { //On vérifie que l'utilisateur qui fait la requête est soit admin, soit celui qui a créer le commentaire.
-        res.status(400).json({ error : 'Unauthorized'}) //Si ce n'est pas le cas, message d'érreur
+      if (comment.userId !== req.token.userId && req.token.isAdmin === false) { //On vérifie que l'utilisateur qui fait la requête est soit admin, soit celui qui a créer le commentaire.
+        return res.status(400).json({ error : 'Unauthorized' + req.token}) //Si ce n'est pas le cas, message d'érreur
       } else {
         comment.destroy({where: {id: req.params.id}}) //Sinon on supprime le commentaire.
+        .then(() => res.status(200).json({message: 'comment deleted'})) //Si tout va bien, message de succès
       }
     })
-    .then(() => res.status(200).json({message: 'comment deleted'})) //Si tout va bien, message de succès
     .catch((error) => res.status(500).json({ error : 'something went wrong ... ' + error}))  //Sinon un message d'érreur'
 }
