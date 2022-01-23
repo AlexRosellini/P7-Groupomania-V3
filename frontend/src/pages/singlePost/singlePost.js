@@ -55,6 +55,7 @@ const SinglePost = () => {
   const handleDeletePost = () => { //Fonction pour delete le post.
     deletePost(id, token); //fonction pour delete le post depuis le store.
     navigate("/"); //On renvoie l'utilisateur vers /, (nos posts)
+    window.location.reload()
   };
 
   const handleDeleteComment = (id) => { //Fonction pou delete comments

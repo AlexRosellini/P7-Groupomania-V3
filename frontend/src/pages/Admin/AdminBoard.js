@@ -28,14 +28,16 @@ const AdminBoard = () => {
 
   useEffect(() => {
     fetchCurrentUser();
-    if (currentUser?.isAdmin === false) {
-      navigate('/posts')
-    }
+    console.log(currentUser?.isAdmin)
+
     fetchAllUsers(token);
     },[fetchAllUsers, fetchCurrentUser])
 
   if (currentUserLoading) return <Loader/>
-
+  if (currentUser?.isAdmin === false) {
+    navigate('/')
+  }
+  
   const handleDeleteUser = async (userId) => {
     try {
         console.log(userId, token);

@@ -5,7 +5,7 @@ const Post = ({ post, isOwner, CurrentId, isAdmin, onComment, onDeletePost, onDe
   const [content, setContent] = useState(""); //On set le hook content
   
   return (
-    <main className="flex-col justify-center bg-gray-400 min-h-screen h-full pt-6 pb-6">
+    <main className="flex-col justify-center bg-gray-400 min-h-screen pt-6 pb-6">
       <div className=" h-fit bg-white mb-6 ml-6 mr-6 mt-12">
         <h1 className="pt-6 mb-6 text-grey-darkest mb-6 underline-offset-auto font-black">
           {post.title}

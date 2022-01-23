@@ -19,7 +19,7 @@ const Auth = () => {
     });
 
     const alert = useAlert(); //On set l'alerte.
-    const {token, login, register, error} = useAuthStore(authStateSelector); 
+    const {token, login, register} = useAuthStore(authStateSelector); 
     let location = useLocation(); //On set la location.
   
     let fallback = location.state?.from?.pathname || "/posts"; //On set le fallback

@@ -31,12 +31,12 @@ const Profile = () => {
 
   if (currentUserLoading) return <Loader/>
   
-  const handleDesc = (description) => { //Fonction pour gêrer le changement de description.    
+  const handleDesc = async (description) => { //Fonction pour gêrer le changement de description.    
       try { 
          if (description.length > 150) { //On donne une limite pour la description
           alert.show('Votre description doit faire moins de 150 caractères') //Si au dessus, on lance une alerte.
          } else {
-          updateUserDesc(userId, token, description) //Sinon on update depuis le store.         
+          await updateUserDesc(userId, token, description) //Sinon on update depuis le store.         
           window.location.reload(); //On reload ensuite la page
          }
       }
@@ -45,9 +45,9 @@ const Profile = () => {
       }
   }
 
-  const handlePic = (formData) => { //Fonction pour le changement de photo.
+  const handlePic = async (formData) => { //Fonction pour le changement de photo.
       try {    
-          updateUserPicture( userId, token, formData) //On update depuis le store
+          await updateUserPicture( userId, token, formData) //On update depuis le store
           window.location.reload(); //et on recharge la page.
       }
       catch(error) {

@@ -17,7 +17,7 @@ module.exports =  async (req, res, next) => {
             next(); //Si tout va bien, next.
         }
         else {
-            res.status(400).json({ message : 'something went wrong ... ' + error}) //Sinon un message d'érreur
+            res.status(400).json({ message : 'something went wrong ... '}) //Sinon un message d'érreur
         }
     })
   } catch (error) {

@@ -1,7 +1,7 @@
 /*************************************************/
 //On Importe ce dont on a besoin.
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useAlert } from "react-alert";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import useAuthStore from '../../stores/auth';

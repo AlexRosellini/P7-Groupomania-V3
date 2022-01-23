@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /*************************************************/
 //On Importe ce dont on a besoin.
 
@@ -23,7 +24,7 @@ const Header = () => {
       if (token) { //Si on a un token.
         fetchCurrentUser(); //On l'utilise pour récuperer l'utilisateur.
       }
-    },[]);
+    },[token]);
 
     const handleClick = () => { 
         logout(); //On utilise la fonction logout du store.

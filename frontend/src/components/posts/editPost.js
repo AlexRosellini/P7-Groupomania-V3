@@ -26,7 +26,7 @@ const EditPost = ({onSubmit}) => { //On récupère de la page.
                     if (mediaContent !== null) { //on vérifie si mediaContent est pas null
                       formData.append('image', mediaContent) //et si oui, on l'ajoute au formData
                     }
-                    {onSubmit(formData)} //Ensuite on utilise notre fonction submit pour édition.
+                    onSubmit(formData) //Ensuite on utilise notre fonction submit pour édition.
                 }}>
                     <h1>Edition de votre poste</h1>
                     <label htmlFor="title" className="post-form__label">

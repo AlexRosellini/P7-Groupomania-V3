@@ -1,7 +1,7 @@
 const UserList = ({users, onDeleteUser, onUpdateRole}) => { //On récupère les fonctions de nos pages.
     return ( 
-        <main className="h-full px-3 py-4 flex justify-center bg-gray-400 ">
-            <table className="w-full text-md bg-white shadow-md rounded mb-4">
+        <main className="h-screen px-4 py-4 flex justify-center bg-gray-400 ">
+            <table className="w-full h-1/3 text-md bg-white shadow-md rounded mb-4">
                 <tbody>
                     <p className="p-3"> {users?.length} utilisateurs enregistrés. </p>
                     <tr className="border-b">
