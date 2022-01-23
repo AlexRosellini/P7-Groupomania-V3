@@ -19,7 +19,6 @@ const useUserStore = create((set) => ({
         set({ loading: true }) //On set loading comme true
         const currentUser = await userService.getUser(currentUserId); //On appel le service to get le currentuser.
         set({ currentUser, loading: false }); //On set loading comme false
-        console.log(currentUser)
   },
 
   fetchUser: async (userId) => {
